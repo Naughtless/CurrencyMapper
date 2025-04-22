@@ -1,24 +1,14 @@
 site|product_id|currency|legal_entity|studentid|fullname|student_status|paymentid|payment_type|item_type|payment_status|amount|gst|payment_date|module_start_date|module_end_date|schedule|enrolment_date|Addon
-piau|8|AUD|No|126544|Mark Lawrence|Active|2350058|PayPal|Ext3|Paid|99|0|1/01/2025|||Monthly|18/06/2016|No
-idde|47|EUR|No|181905|Kristina Dauth|Active|2350023|PayPal|AdvMod|Paid|112.5|0|1/01/2025|45658|NULL|Monthly|17/03/2020|No
-aiuk|31|GBP|No|190200|Tamara McDonagh|Active|2350099|PayPal|Ext3|Paid|65|0|1/01/2025|||Monthly|9/07/2020|No
-idie|1|EUR|No|211284|Adegboyega Adenekan|Active|2350031|PayPal|Ext12|Paid|150|0|1/01/2025|||Full|31/12/2020|No
-pide|2|EUR|No|260294|Hilmar Keller|Active|2350130|PayPal|Ext12|Refund|-150|0|1/01/2025|||Full|5/01/2023|No
-idedu|88|AUD|No|267309|Sarah Thompson|Active|2350105|PayPal|AdvMod|Paid|149.25|13.56|1/01/2025|45658|NULL|Full|12/04/2023|No
-idnz|7|NZD|No|286893|Lindsey Shaw|Active|2305694|PayPal|CourseFee|Paid|91.5|0|1/01/2025|||Monthly|31/07/2024|No
-idca|17|CAD|No|286943|Rabiah Naeem|Active|2306085|PayPal|CourseFee|Paid|91.5|0|1/01/2025|||Monthly|1/08/2024|No
-idcafr|74|CAD|No|289475|Romaissa Zeraoulia|Active|2328761|PayPal|CourseFee|Paid|183.17|0|1/01/2025|||Monthly|1/10/2024|No
-piit|32|EUR|No|291461|Laura|Cancelled|2350216|PayPal|CourseFee|Refund|-41.63|0|2/01/2025|||Weekly|22/12/2024|No
-piie|18|EUR|No|291667|Sean Michael Phelan|Active|2349980|PayPal|CourseFee|Paid|83.17|0|1/01/2025|||Monthly|1/01/2025|No
-pica|6|CAD|No|291670|Jazmyn McKinnon|Active|2350018|PayPal|CourseFee|Paid|999|0|1/01/2025|||Full|1/01/2025|No
-idus|15|USD|No|291671|Elonda Wilson|Active|2350030|PayPal|CourseFee|Paid|999|0|1/01/2025|||Full|1/01/2025|No
-pide|2|EUR|No|291692|Marco Sakolowski|Cancelled|2353139|PayPal|CourseFee|Refund|-83.17|0|9/01/2025|||Monthly|1/01/2025|No
-idpy|111|PYG|No|291885|Josue Junior Sosa Lopez|Cancelled|2352866|PayPal|CourseFee|Refund|-83333|0|8/01/2025|||Weekly|6/01/2025|No
-nuuk|94|GBP|No|291893|Lindsay Bennett|Cancelled|2353694|PayPal|CourseFee|Refund|-37.46|0|10/01/2025|||Custom|6/01/2025|No
-idde|47|EUR|No|292041|Petra Kaiser|Cancelled|2353860|PayPal|CourseFee|Refund|-499|0|12/01/2025|||Full|10/01/2025|No
-idat|48|EUR|No|292061|Kitti Jurysik-Kiss|Cancelled|2356597|PayPal|CourseFee|Refund|-499|0|20/01/2025|||Full|11/01/2025|No
-idie|1|EUR|No|292070|Andrea Geary|Cancelled|2357432|PayPal|CourseFee|Refund|-20.79|0|21/01/2025|||Custom|11/01/2025|No
-idie|1|EUR|No|292070|Andrea Geary|Cancelled|2357433|PayPal|CourseFee|Refund|-20.79|0|21/01/2025|||Custom|11/01/2025|No
-piit|32|EUR|No|292102|Alex De Stefano|Cancelled|2354834|PayPal|CourseFee|Refund|-166.5|0|15/01/2025|||Monthly|13/01/2025|No
-pich|5|CHF|No|292244|Bruno Häusler|Cancelled|2359109|PayPal|CourseFee|Refund|-999|0|27/01/2025|||Full|15/01/2025|No
-piat|4|EUR|No|292537|Stefan Diermayr|Cancelled|2358211|PayPal|CourseFee|Refund|-949|0|23/01/2025|||Full|22/01/2025|No
+idau|13|AUD|No|194712|Amy Eccles|Active|2370673|PayPal|Ext12|Paid|199.00|0.00|1/03/2025|||Full|7/09/2020|No
+idde|47|EUR|No|237694|Daniel Oberholzer|Active|2374436|PayPal|Webinar|Refund|-29.00|0.00|13/03/2025|||Full|28/12/2021|No
+eiau|103|AUD|No|285775|Ellie Thompson|Active|2377700|PayPal|CourseFee|Refund|-45.79|-4.16|18/03/2025|||Weekly|25/06/2024|No
+eiau|103|AUD|No|285775|Ellie Thompson|Active|2377701|PayPal|CourseFee|Refund|-45.79|-4.16|18/03/2025|||Weekly|25/06/2024|No
+eiau|103|AUD|No|285775|Ellie Thompson|Active|2377702|PayPal|CourseFee|Refund|-18.32|-1.67|18/03/2025|||Weekly|25/06/2024|No
+finz|121|NZD|No|289417|Sonya Bolek|Active|2328181|PayPal|CourseFee|Paid|91.50|0.00|1/03/2025|||Monthly|30/09/2024|No
+idcafr|74|CAD|No|289475|Romaissa Zeraoulia|Active|2328763|PayPal|CourseFee|Paid|183.17|0.00|1/03/2025|||Monthly|1/10/2024|No
+idus|15|USD|No|294242|Milena Ramey|Cancelled|2371167|PayPal|CourseFee|Refund|-91.50|0.00|2/03/2025|||Custom|28/02/2025|No
+idca|17|CAD|No|294265|Amber Phoenix|Active|2370681|PayPal|CourseFee|Paid|183.17|0.00|1/03/2025|||Monthly|1/03/2025|No
+idfr|72|EUR|No|294313|Radia Ahmed-Ali|Cancelled|2373908|PayPal|CourseFee|Refund|-166.50|0.00|12/03/2025|||Monthly|2/03/2025|No
+idchfr|75|CHF|No|294488|Sandrine Curchod|Cancelled|2374402|PayPal|CourseFee|Refund|-149.83|0.00|13/03/2025|||Monthly|8/03/2025|No
+nuau|91|AUD|No|294611|Porsche Skeet|Cancelled|2374539|PayPal|CourseFee|Refund|-45.79|4.16|14/03/2025|||Custom|13/03/2025|No
+piit|32|EUR|No|294772|Lisa Lombardi|Cancelled|2376255|PayPal|CourseFee|Refund|-141.50|0.00|21/03/2025|||Custom|19/03/2025|No
