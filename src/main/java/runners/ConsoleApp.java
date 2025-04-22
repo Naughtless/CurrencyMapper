@@ -1,29 +1,38 @@
 package main.java.runners;
 
+import main.java.process.afterpay.AfterpayModule;
+import main.java.process.afterpay.model.AfterpayRate;
+import main.java.process.common.Match;
+import main.java.process.exchangerate.model.ExchangeRate;
+import main.java.process.paypal.model.Paypal;
+import main.java.process.exchangerate.ExchangerateModule;
+import main.java.process.paypal.PaypalModule;
+import main.java.read.AfterpayReader;
 import main.java.user.UserInputGUI;
 import main.java.util.Ansi;
 import main.java.util.ConsoleMessage;
-import main.java.OLDdata.matches.MatchAfterPay;
-import main.java.OLDdata.matches.MatchPDExc;
-import main.java.OLDdata.matches.MatchPDPP;
-import main.java.read.masterdata.PaymentData;
-import main.java.OLDfile.grouper.ExchangeRateSourceGrouper;
-import main.java.OLDfile.grouper.PayPalInvoiceGrouper;
-import main.java.OLDfile.matcher.AfterPayRateProcessor;
-import main.java.OLDfile.matcher.Matcher_ExchangeRate;
-import main.java.OLDfile.matcher.Matcher_PaymentData_PayPalGBN;
-import main.java.read.externaldata.ExchangeRateReader;
-import main.java.read.externaldata.PayPalReader;
-import main.java.read.masterdata.PaymentDataReader;
-import main.java.write.Writer;
+import main.java.process.afterpay.MatchAfterPay;
+import main.java.process.exchangerate.MatchPDExc;
+import main.java.process.paypal.MatchPDPP;
+import main.java.process.common.PaymentData;
+import main.java.process.exchangerate.ExchangerateSourceGrouper;
+import main.java.process.paypal.PaypalGrouper;
+import main.java.process.afterpay.AfterPayRateProcessor;
+import main.java.process.exchangerate.Matcher_ExchangeRate;
+import main.java.process.paypal.Matcher_PaymentData_PayPalGBN;
+import main.java.read.ExchangeRateReader;
+import main.java.read.PaypalReader;
+import main.java.read.PaymentDataReader;
+import main.java.write.OldWriter;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.logging.XMLFormatter;
+import java.util.ArrayList;
 
 public class ConsoleApp
 {
     public static void main(String[] args)
+            throws IOException
     {
 
         /*
@@ -43,27 +52,46 @@ public class ConsoleApp
             }
         }
     }
-    
-    public static void currencyMapper() 
+
+    public static void currencyMapper()
     {
-        // 1. Read master data: PaymentData.
-        String masterDir = UserInputGUI.getFileName("PaymentData");
-        ? rawMaster = read(masterDir);
+        // 1A. Read master data: PaymentData.
+        String                 masterDir = UserInputGUI.getFileName("PaymentData");
+        ArrayList<PaymentData> rawMaster = new PaymentDataReader().readPaymentData(masterDir);
+
+        // 1B. Read external data: PayPal.
+        String            paypalDir = UserInputGUI.getFileName("PayPal");
+        ArrayList<Paypal> rawPaypal = new PaypalReader().readPayPal(paypalDir);
+
+        // 1C. Read external data: ExchangeRate.
+        String                  exchrateDir = UserInputGUI.getFileName("ExchangeRate");
+        ArrayList<ExchangeRate> rawExchrate = new ExchangeRateReader().readExchangeRate(exchrateDir);
+
+        // 1D. Read external data: AfterPay.
+        String       afterpayDir  = UserInputGUI.getFileName("AfterPay Rate");
+        AfterpayRate afterpayRate = new AfterpayReader().readRate(afterpayDir);
+
+        // 2. Instantiate ArrayList<Matches> to store processing results.
+        ArrayList<Match> matches = new ArrayList<>();
+
+        // 2A. Process: PaymentData x PayPal
+        ArrayList<Match> ppMatches = new PaypalModule(rawMaster, rawPaypal).getMatches();
+        matches.addAll(ppMatches);
         
-        // 2. Read external data: PayPal.
-        String paypalDir = UserInputGUI.getFileName("PayPal");
-        ? rawPaypal = read(paypalDir);
+        // 2B. Process: PaymentData x ExchangeRate
+        ArrayList<Match> erMatches = new ExchangerateModule(rawMaster, rawExchrate).getMatches();
+        matches.addAll(erMatches);
         
-        // 3. Read external data: ExchangeRate.
-        String rateDir = UserInputGUI.getFileName("ExchangeRate");
-        ? rawRate = read(rateDir);
-        
+        // 2C. Process: PaymentData x AfterPay
+        ArrayList<Match> apMatches = new AfterpayModule(rawMaster, afterpayRate).getMatches();
+        matches.addAll(apMatches);
     }
 
-    public static void start(BufferedReader uReader) {
+    public static void start(BufferedReader uReader)
+    {
         //<editor-fold desc="Read Source Files">
-        PaymentDataReader paymentReader;
-        PayPalReader paypalReader;
+        PaymentDataReader  paymentReader;
+        PaypalReader       paypalReader;
         ExchangeRateReader excReader;
 
         //<editor-fold desc="Files Detection">
@@ -71,37 +99,43 @@ public class ConsoleApp
 
         File[] files = directory.listFiles(file -> file.isFile());
         ConsoleMessage.info("Source files detected:");
-        for(int i = 0; i < files.length; i++) {
-            System.out.println(Ansi.MAGENTA + "[" + (i+1) + "] " + Ansi.RESET + files[i].getName());
+        for (int i = 0; i < files.length; i++)
+        {
+            System.out.println(Ansi.MAGENTA + "[" + (i + 1) + "] " + Ansi.RESET + files[i].getName());
         }
         //</editor-fold>
 
         // Read PaymentData source file.
-        while(true) {
+        while (true)
+        {
             ConsoleMessage.input("Specify " + Ansi.RED + "PaymentData" + Ansi.YELLOW + " source file!");
 
             String paymentSourceDir = "";
-            try {
-                paymentSourceDir = "sources\\" + files[Integer.parseInt(uReader.readLine())-1].getName();
+            try
+            {
+                paymentSourceDir = "sources\\" + files[Integer.parseInt(uReader.readLine()) - 1].getName();
                 ConsoleMessage.br();
             }
-            catch(IOException iox) {
+            catch (IOException iox)
+            {
                 ConsoleMessage.error(iox, "Something has gone very wrong whilst attempting to read user input.");
             }
 
-            try {
+            try
+            {
                 ConsoleMessage.info("Attempting to read file \"" + paymentSourceDir + "\"...");
 
                 paymentReader = new PaymentDataReader(paymentSourceDir);
-                paymentReader.readFile();
-                paymentReader.process();
+                paymentReader.read();
+                paymentReader.readPaymentData();
 
                 ConsoleMessage.info("DONE!");
                 ConsoleMessage.br();
 
                 break;
             }
-            catch(IOException ignored) {
+            catch (IOException ignored)
+            {
                 ConsoleMessage.warning("File reading failed!");
                 ConsoleMessage.info("Make sure the main.file name is typed correctly, case sensitive.");
                 ConsoleMessage.info("Try again!");
@@ -111,31 +145,36 @@ public class ConsoleApp
         }
 
         // Read PayPal source file.
-        while(true) {
+        while (true)
+        {
             ConsoleMessage.input("Specify " + Ansi.RED + "PayPal" + Ansi.YELLOW + " source file!");
 
             String paypalSourceDir = "";
-            try {
-                paypalSourceDir = "sources\\" + files[Integer.parseInt(uReader.readLine())-1].getName();
+            try
+            {
+                paypalSourceDir = "sources\\" + files[Integer.parseInt(uReader.readLine()) - 1].getName();
                 ConsoleMessage.br();
             }
-            catch(IOException iox) {
+            catch (IOException iox)
+            {
                 ConsoleMessage.error(iox, "Something has gone very wrong whilst attempting to read user input.");
             }
 
-            try {
+            try
+            {
                 ConsoleMessage.info("Attempting to read main.file \"" + paypalSourceDir + "\"...");
 
-                paypalReader = new PayPalReader(paypalSourceDir);
-                paypalReader.readFile();
-                paypalReader.process();
+                paypalReader = new PaypalReader(paypalSourceDir);
+                paypalReader.read();
+                paypalReader.readPayPal();
 
                 ConsoleMessage.info("DONE!");
                 ConsoleMessage.br();
 
                 break;
             }
-            catch(IOException e1) {
+            catch (IOException e1)
+            {
                 ConsoleMessage.warning("File reading failed!");
                 ConsoleMessage.info("Make sure the main.file name is typed correctly, case sensitive.");
                 ConsoleMessage.info("Try again!");
@@ -144,32 +183,37 @@ public class ConsoleApp
             }
         }
 
-        // Read exchange rate source file.
-        while(true) {
+        // Read Exchange Rate source file.
+        while (true)
+        {
             ConsoleMessage.input("Specify " + Ansi.RED + "Exchange Rate" + Ansi.YELLOW + " source file!");
 
             String exchangeRateSourceDir = "";
-            try {
-                exchangeRateSourceDir = "sources\\" + files[Integer.parseInt(uReader.readLine())-1].getName();
+            try
+            {
+                exchangeRateSourceDir = "sources\\" + files[Integer.parseInt(uReader.readLine()) - 1].getName();
                 ConsoleMessage.br();
             }
-            catch(IOException iox) {
+            catch (IOException iox)
+            {
                 ConsoleMessage.error(iox, "Something has gone very wrong whilst attempting to read user input.");
             }
 
-            try {
+            try
+            {
                 ConsoleMessage.info("Attempting to read main.file \"" + exchangeRateSourceDir + "\"...");
 
                 excReader = new ExchangeRateReader(exchangeRateSourceDir);
-                excReader.readFile();
-                excReader.process();
+                excReader.read();
+                excReader.readExchangeRate();
 
                 ConsoleMessage.info("DONE!");
                 ConsoleMessage.br();
 
                 break;
             }
-            catch(IOException e1) {
+            catch (IOException e1)
+            {
                 ConsoleMessage.warning("File reading failed!");
                 ConsoleMessage.info("Make sure the main.file name is typed correctly, case sensitive.");
                 ConsoleMessage.info("Try again!");
@@ -180,26 +224,31 @@ public class ConsoleApp
 
         //</editor-fold>
 
-        //<editor-fold desc="1A. PAYPAL: Group by Name">
-        PayPalInvoiceGrouper paypalGrouper = new PayPalInvoiceGrouper(paypalReader.getContents());
+        //<editor-fold desc="1A. PAYPAL: Group by Invoice">
+        PaypalGrouper paypalGrouper = new PaypalGrouper(paypalReader.getContents());
 
         paypalGrouper.group();
         paypalGrouper.calculate();
         //</editor-fold>
 
         //<editor-fold desc="1B. PAYPAL: Matching">
-        Matcher_PaymentData_PayPalGBN pdppMatcher = new Matcher_PaymentData_PayPalGBN(paymentReader.getContents(), paypalGrouper.getGroupedArray());
-        try {
+        Matcher_PaymentData_PayPalGBN pdppMatcher = new Matcher_PaymentData_PayPalGBN(
+                paymentReader.getContents(),
+                paypalGrouper.getGroupedArray()
+        );
+        try
+        {
             pdppMatcher.process();
         }
-        catch (ParseException e) {
+        catch (ParseException e)
+        {
             ConsoleMessage.error(e, "Parse failure!");
         }
 
         //</editor-fold>
 
         //<editor-fold desc="2A. BT, CB, CC, T: Exchange Rate, Group by Source">
-        ExchangeRateSourceGrouper excGrouper = new ExchangeRateSourceGrouper(excReader.getContents());
+        ExchangerateSourceGrouper excGrouper = new ExchangerateSourceGrouper(excReader.getContents());
 
         excGrouper.group();
         //</editor-fold>
@@ -216,10 +265,12 @@ public class ConsoleApp
          */
         AfterPayRateProcessor app = new AfterPayRateProcessor(paymentReader.getContents());
 
-        try{
+        try
+        {
             app.process();
         }
-        catch(FileNotFoundException x) {
+        catch (FileNotFoundException x)
+        {
             ConsoleMessage.error(x, "Rates configuration file not found!");
         }
         //</editor-fold>
@@ -228,9 +279,9 @@ public class ConsoleApp
         ConsoleMessage.info("Writing results...");
 
         // Instantiate writer(s).
-        Writer<MatchPDPP, PaymentData> pdppWriter = new Writer<>(); // PD(PayPal) with PayPal
-        Writer<MatchPDExc, PaymentData> pdExcWriter = new Writer<>(); // PD(Others) with Exchange Rate
-        Writer<MatchAfterPay, MatchAfterPay> apWriter = new Writer(); // AfterPay...
+        OldWriter<MatchPDPP, PaymentData>       pdppWriter  = new OldWriter<>(); // PD(PayPal) with PayPal
+        OldWriter<MatchPDExc, PaymentData>      pdExcWriter = new OldWriter<>(); // PD(Others) with Exchange Rate
+        OldWriter<MatchAfterPay, MatchAfterPay> apWriter    = new OldWriter(); // AfterPay...
 
         // Matched data
         pdppWriter.setMatches(pdppMatcher.getSidMatches());
@@ -244,8 +295,10 @@ public class ConsoleApp
         apWriter.setMatches(app.getMatches());
 
         // Attempt to write.
-        while(true) {
-            try{
+        while (true)
+        {
+            try
+            {
                 // Start with header first.
                 pdppWriter.writeMatchHeader("results\\matches.csv");
                 pdppWriter.writeMatches("results\\matches.csv", true);
@@ -259,7 +312,8 @@ public class ConsoleApp
 
                 break;
             }
-            catch(IOException iox) {
+            catch (IOException iox)
+            {
                 ConsoleMessage.warning("Failed to write to files. Please close all result files, then try again.");
             }
         }
@@ -274,18 +328,17 @@ public class ConsoleApp
 //        M.warning("PayPal data with a blank 'Invoice Number' field are ignored!");
 //        M.br();
 
-        int pdppNum = pdppMatcher.getSidMatches().size();
-        int excNum = excMatcher.getMatches().size();
-        int apNum = app.getMatches().size();
+        int pdppNum  = pdppMatcher.getSidMatches().size();
+        int excNum   = excMatcher.getMatches().size();
+        int apNum    = app.getMatches().size();
         int matchNum = pdppNum + excNum + apNum;
-        ConsoleMessage.info(
-                "Matches: " + Ansi.DARK_YELLOW +  matchNum);
+        ConsoleMessage.info("Matches: " + Ansi.DARK_YELLOW + matchNum);
         ConsoleMessage.br();
 
         ConsoleMessage.info("No-matches: " + Ansi.DARK_YELLOW + pdppMatcher.getPdSingles().size());
         ConsoleMessage.br();
 
-        File dirMatches = new File("results\\matches.csv");
+        File dirMatches   = new File("results\\matches.csv");
         File dirNoMatches = new File("results\\no_matches.csv");
 
         ConsoleMessage.info("Results can be found in the " + Ansi.DARK_YELLOW + "./results/" + Ansi.CYAN + " folder.");

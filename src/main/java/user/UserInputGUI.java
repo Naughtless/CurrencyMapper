@@ -41,7 +41,7 @@ public class UserInputGUI
         }
     }
     
-    public static String getFileName()
+    public static String getFileName(String instruction)
     {
         // Detect files in the sources folder.
         File[] files = new File("sources\\").listFiles(file -> file.isFile());
@@ -49,5 +49,17 @@ public class UserInputGUI
         for(int i = 0; i < files.length; i++) {
             ConsoleMessage.choice(String.valueOf((i + 1)), files[i].getName());
         }
+
+        // Prompt user selection.
+        ConsoleMessage.input("Specify " + Ansi.BOLD + Ansi.RED + instruction + Ansi.RESET + Ansi.YELLOW + " source file!");
+
+        BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
+        String userSource              = "";
+        try { userSource = "sources\\" + files[Integer.parseInt(userInputReader.readLine())-1].getName(); }
+        catch(IOException iox) { ConsoleMessage.error(iox, "FATAL - Unable to read user input."); }
+        
+        ConsoleMessage.br();
+        
+        return userSource;
     }
 }

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="CurrencyMapper_jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/CurrencyMapper_jar/CurrencyMapper.zip!/" />
+      <root url="jar://$PROJECT_DIR$/out/artifacts/CurrencyMapper_jar/CurrencyMapper.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

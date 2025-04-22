@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a1bd7d7c-5c4a-49b7-af67-c97b47002120" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/CurrencyMapper_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/process/afterpay/AfterpayModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/process/afterpay/model/AfterpayRate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/process/common/Match.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/ExchangerateModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/process/paypal/PaypalModule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/read/AfterpayReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/read/ExchangeRateReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/read/PaymentDataReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/read/PaypalReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/write/MatchWriter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/write/SinglesWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/CurrencyMapper_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDdata/exchangerate/ExchangeRateGBSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/model/ExchangeRateGrouped.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDdata/exchangerate/comparator/ExchangeRateComparatorSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/comparator/ExchangeRateComparatorSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDdata/matches/MatchAfterPay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/afterpay/MatchAfterPay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDdata/matches/MatchPDExc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/MatchPDExc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDdata/matches/MatchPDPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/MatchPDPP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDdata/paypal/PayPalGBInvoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/model/PaypalGrouped.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDdata/paypal/comparator/PayPalComparatorInvoiceDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/comparator/PaypalComparatorInvoiceDate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDdata/paypal/comparator/PayPalGBInvoiceComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/comparator/PaypalGBInvoiceComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDfile/grouper/ExchangeRateSourceGrouper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/ExchangerateSourceGrouper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDfile/grouper/PayPalInvoiceGrouper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/PaypalGrouper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDfile/matcher/AfterPayRateProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/afterpay/AfterPayRateProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDfile/matcher/Matcher_ExchangeRate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/Matcher_ExchangeRate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OLDfile/matcher/Matcher_PaymentData_PayPalGBN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/Matcher_PaymentData_PayPalGBN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/CSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/common/CSV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/read/CSVReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/common/CSVReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/read/externaldata/ExchangeRate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/model/ExchangeRate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/read/externaldata/ExchangeRateReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/read/externaldata/PayPal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/model/Paypal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/read/externaldata/PayPalReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/read/masterdata/PaymentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/common/PaymentData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/read/masterdata/PaymentDataReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/runners/ConsoleApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/runners/ConsoleApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/user/UserInputGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/UserInputGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/write/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/write/OldWriter.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2w4LeJFYWu4sqljp643jgf3kMLB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a1bd7d7c-5c4a-49b7-af67-c97b47002120" name="Changes" comment="" />
+      <created>1745295993756</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1745295993756</updated>
+      <workItem from="1745295995131" duration="13055000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
