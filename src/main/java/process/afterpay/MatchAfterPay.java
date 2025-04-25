@@ -1,7 +1,7 @@
 package main.java.process.afterpay;
 
-import main.java.process.common.CSV;
-import main.java.process.common.PaymentData;
+import main.java.common.CSV;
+import main.java.common.PaymentData;
 
 public class MatchAfterPay implements CSV {
     private PaymentData paymentData;

@@ -1,6 +1,4 @@
-package main.java.process.paypal.model;
-
-import main.java.process.common.CSV;
+package main.java.common;
 
 import java.util.Objects;
 

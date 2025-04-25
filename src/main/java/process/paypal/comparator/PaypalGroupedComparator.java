@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
-public class PaypalGBInvoiceComparator
+public class PaypalGroupedComparator
         implements Comparator<PaypalGrouped> {
     @Override
     public int compare(PaypalGrouped r1, PaypalGrouped r2) {

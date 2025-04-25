@@ -1,8 +1,8 @@
 package main.java.process.exchangerate;
 
 import main.java.process.exchangerate.model.ExchangeRateGrouped;
-import main.java.process.common.PaymentData;
-import main.java.process.exchangerate.model.ExchangeRate;
+import main.java.common.PaymentData;
+import main.java.common.ExchangeRate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class Matcher_ExchangeRate
     //<editor-fold desc="Methods">
     public void process()
     {
-        // Cycle-check for appropriate exchange rates.txt, with priority:
+        // Cycle-check for appropriate exchange AfterPay Rate.txt, with priority:
                 /*
                 1. 'Monthly Exch Rate'
                 2. Anything else. ('RBA rate' & 'XE Rate')

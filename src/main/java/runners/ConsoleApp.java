@@ -1,10 +1,10 @@
 package main.java.runners;
 
 import main.java.process.afterpay.AfterpayModule;
-import main.java.process.afterpay.model.AfterpayRate;
-import main.java.process.common.Match;
-import main.java.process.exchangerate.model.ExchangeRate;
-import main.java.process.paypal.model.Paypal;
+import main.java.common.AfterpayRate;
+import main.java.common.Match;
+import main.java.common.ExchangeRate;
+import main.java.common.Paypal;
 import main.java.process.exchangerate.ExchangerateModule;
 import main.java.process.paypal.PaypalModule;
 import main.java.read.AfterpayReader;
@@ -14,7 +14,7 @@ import main.java.util.ConsoleMessage;
 import main.java.process.afterpay.MatchAfterPay;
 import main.java.process.exchangerate.MatchPDExc;
 import main.java.process.paypal.MatchPDPP;
-import main.java.process.common.PaymentData;
+import main.java.common.PaymentData;
 import main.java.process.exchangerate.ExchangerateSourceGrouper;
 import main.java.process.paypal.PaypalGrouper;
 import main.java.process.afterpay.AfterPayRateProcessor;
@@ -87,6 +87,10 @@ public class ConsoleApp
         matches.addAll(apMatches);
     }
 
+    
+    /* OLD & NEW BARRIER -------------------------------------- */
+    
+    
     public static void start(BufferedReader uReader)
     {
         //<editor-fold desc="Read Source Files">

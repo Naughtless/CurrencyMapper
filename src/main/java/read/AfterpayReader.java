@@ -1,6 +1,6 @@
 package main.java.read;
 
-import main.java.process.afterpay.model.AfterpayRate;
+import main.java.common.AfterpayRate;
 import main.java.util.ConsoleMessage;
 
 import java.io.BufferedReader;
@@ -12,7 +12,8 @@ public class AfterpayReader
 {
     public AfterpayRate readRate(String dir)
     {
-        double rate = -1;
+        double fee_percentage = -1;
+        double fee_flat = -1;
         double gst  = -1;
 
         try (BufferedReader rateReader = new BufferedReader(new FileReader(dir)))
@@ -21,8 +22,12 @@ public class AfterpayReader
             while ((line = rateReader.readLine()) != null)
             {
                 String[] parts = line.split("=");
-                if ("rate".equals(parts[0].trim())) rate = Double.parseDouble(parts[1].trim());
-                if ("gst".equals(parts[0].trim())) gst = Double.parseDouble(parts[1].trim());
+                if ("fee_percentage".equals(parts[0].trim())) 
+                    fee_percentage = Double.parseDouble(parts[1].trim());
+                if ("fee_flat".equals(parts[0].trim()))
+                    fee_flat = Double.parseDouble(parts[1].trim());
+                if ("gst".equals(parts[0].trim())) 
+                    gst = Double.parseDouble(parts[1].trim());
             }
         }
         catch (FileNotFoundException e)
@@ -34,9 +39,9 @@ public class AfterpayReader
             ConsoleMessage.error(e, "FATAL - Could not read file!");
         }
 
-        if (rate != -1 && gst != -1)
+        if (fee_percentage != -1 && gst != -1)
         {
-            return new AfterpayRate(rate, gst);
+            return new AfterpayRate(fee_percentage, fee_flat, gst);
         }
         
         ConsoleMessage.error(

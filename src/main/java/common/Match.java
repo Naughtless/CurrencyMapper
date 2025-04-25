@@ -1,4 +1,4 @@
-package main.java.process.common;
+package main.java.common;
 
 public class Match
 {

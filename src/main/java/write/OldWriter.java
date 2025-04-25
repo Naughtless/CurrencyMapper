@@ -1,7 +1,7 @@
 package main.java.write;
 
-import main.java.process.common.CSV;
-import main.java.process.common.PaymentData;
+import main.java.common.CSV;
+import main.java.common.PaymentData;
 
 import java.io.BufferedWriter;
 import java.io.File;

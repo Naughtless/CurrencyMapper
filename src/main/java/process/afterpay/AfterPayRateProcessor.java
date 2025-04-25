@@ -1,6 +1,6 @@
 package main.java.process.afterpay;
 
-import main.java.process.common.PaymentData;
+import main.java.common.PaymentData;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -26,7 +26,7 @@ public class AfterPayRateProcessor {
         double configRate = 0;
         double configGst = 0;
 
-        try (BufferedReader rateReader = new BufferedReader(new FileReader("rates.txt"))) {
+        try (BufferedReader rateReader = new BufferedReader(new FileReader("AfterPay Rate.txt"))) {
             String line;
             while ((line = rateReader.readLine()) != null) {
                 String[] parts = line.split("=");

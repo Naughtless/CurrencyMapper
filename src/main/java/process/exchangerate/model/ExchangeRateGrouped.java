@@ -1,5 +1,7 @@
 package main.java.process.exchangerate.model;
 
+import main.java.common.ExchangeRate;
+
 import java.util.ArrayList;
 import java.util.Objects;
 

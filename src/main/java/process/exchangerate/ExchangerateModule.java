@@ -1,8 +1,8 @@
 package main.java.process.exchangerate;
 
-import main.java.process.common.Match;
-import main.java.process.common.PaymentData;
-import main.java.process.exchangerate.model.ExchangeRate;
+import main.java.common.Match;
+import main.java.common.PaymentData;
+import main.java.common.ExchangeRate;
 
 import java.util.ArrayList;
 

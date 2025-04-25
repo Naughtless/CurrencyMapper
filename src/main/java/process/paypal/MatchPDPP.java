@@ -1,7 +1,7 @@
 package main.java.process.paypal;
 
-import main.java.process.common.CSV;
-import main.java.process.common.PaymentData;
+import main.java.common.CSV;
+import main.java.common.PaymentData;
 import main.java.process.paypal.model.PaypalGrouped;
 
 public class MatchPDPP implements CSV {

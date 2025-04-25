@@ -1,9 +1,9 @@
 package main.java.process.paypal;
 
 import main.java.util.ConsoleMessage;
-import main.java.process.common.PaymentData;
+import main.java.common.PaymentData;
 import main.java.process.paypal.model.PaypalGrouped;
-import main.java.process.paypal.comparator.PaypalGBInvoiceComparator;
+import main.java.process.paypal.comparator.PaypalGroupedComparator;
 
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -31,7 +31,7 @@ public class Matcher_PaymentData_PayPalGBN
         this.ppSource = ppSource;
 
         // Sort by 'studentID'
-        this.ppSource.sort(new PaypalGBInvoiceComparator());
+        this.ppSource.sort(new PaypalGroupedComparator());
 
         sidMatches = new ArrayList<>();
 

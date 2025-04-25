@@ -1,8 +1,8 @@
 package main.java.process.exchangerate;
 
 import main.java.process.exchangerate.model.ExchangeRateGrouped;
-import main.java.process.exchangerate.comparator.ExchangeRateComparatorSource;
-import main.java.process.exchangerate.model.ExchangeRate;
+import main.java.process.exchangerate.comparator.ExchangeRateComparator;
+import main.java.common.ExchangeRate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ public class ExchangerateSourceGrouper
     public ExchangerateSourceGrouper(ArrayList<ExchangeRate> sourceArray) {
         this.sourceArray = sourceArray;
 
-        this.sourceArray.sort(new ExchangeRateComparatorSource());
+        this.sourceArray.sort(new ExchangeRateComparator());
     }
 
     public void group() {

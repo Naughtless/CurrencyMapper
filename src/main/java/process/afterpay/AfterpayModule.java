@@ -1,8 +1,8 @@
 package main.java.process.afterpay;
 
-import main.java.process.afterpay.model.AfterpayRate;
-import main.java.process.common.Match;
-import main.java.process.common.PaymentData;
+import main.java.common.AfterpayRate;
+import main.java.common.Match;
+import main.java.common.PaymentData;
 
 import java.util.ArrayList;
 

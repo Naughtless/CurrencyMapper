@@ -1,6 +1,6 @@
 package main.java.process.paypal.comparator;
 
-import main.java.process.paypal.model.Paypal;
+import main.java.common.Paypal;
 
 import java.util.Comparator;
 

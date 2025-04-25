@@ -1,6 +1,6 @@
 package main.java.read;
 
-import main.java.process.common.PaymentData;
+import main.java.common.PaymentData;
 import main.java.read.common.CSVReader;
 
 import java.util.ArrayList;
@@ -18,25 +18,25 @@ public class PaymentDataReader
             if (i > 0)
             {
                 contents.add(new PaymentData(
-                        results.get(i)[0],
-                        results.get(i)[1],
-                        results.get(i)[2],
-                        results.get(i)[3],
-                        results.get(i)[4],
-                        results.get(i)[5],
-                        results.get(i)[6],
-                        results.get(i)[7],
-                        results.get(i)[8],
-                        results.get(i)[9],
-                        results.get(i)[10],
-                        results.get(i)[11],
-                        results.get(i)[12],
-                        results.get(i)[13],
-                        results.get(i)[14],
-                        results.get(i)[15],
-                        results.get(i)[16],
-                        results.get(i)[17],
-                        results.get(i)[18]
+                        results.get(i)[0].trim(),
+                        results.get(i)[1].trim(),
+                        results.get(i)[2].trim(),
+                        results.get(i)[3].trim(),
+                        results.get(i)[4].trim(),
+                        results.get(i)[5].trim(),
+                        results.get(i)[6].trim(),
+                        results.get(i)[7].trim(),
+                        results.get(i)[8].trim(),
+                        results.get(i)[9].trim(),
+                        results.get(i)[10].trim(),
+                        results.get(i)[11].trim(),
+                        results.get(i)[12].trim(),
+                        results.get(i)[13].trim(),
+                        results.get(i)[14].trim(),
+                        results.get(i)[15].trim(),
+                        results.get(i)[16].trim(),
+                        results.get(i)[17].trim(),
+                        results.get(i)[18].trim()
                 ));
             }
         }

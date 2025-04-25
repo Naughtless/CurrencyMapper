@@ -2,7 +2,7 @@ package main.java.process.paypal;
 
 import main.java.process.paypal.model.PaypalGrouped;
 import main.java.process.paypal.comparator.PaypalComparatorInvoiceDate;
-import main.java.process.paypal.model.Paypal;
+import main.java.common.Paypal;
 
 import java.util.ArrayList;
 

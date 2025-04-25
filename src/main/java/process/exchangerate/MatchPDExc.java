@@ -1,8 +1,8 @@
 package main.java.process.exchangerate;
 
-import main.java.process.common.CSV;
-import main.java.process.common.PaymentData;
-import main.java.process.exchangerate.model.ExchangeRate;
+import main.java.common.CSV;
+import main.java.common.PaymentData;
+import main.java.common.ExchangeRate;
 
 public class MatchPDExc implements CSV {
     private PaymentData  paymentData;

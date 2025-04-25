@@ -1,10 +1,10 @@
 package main.java.process.paypal;
 
-import main.java.process.common.Match;
-import main.java.process.common.PaymentData;
+import main.java.common.Match;
+import main.java.common.PaymentData;
 import main.java.process.paypal.comparator.PaypalComparatorInvoiceDate;
 import main.java.process.paypal.model.PaypalGrouped;
-import main.java.process.paypal.model.Paypal;
+import main.java.common.Paypal;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class PaypalModule
         this.rawMaster = rawMaster;
         this.rawPaypal = rawPaypal;
     }
-    
+
     public ArrayList<Match> getMatches()
     {
         /*
@@ -30,15 +30,41 @@ public class PaypalModule
          *  -> Currency conversion!
          *  -> Example: +849 GBP(cr) | -18.03 GBP(GST) | -830.97 GBP(conv) | +1688.6 AUD(conv)
          */
-        
+
         // 1. Paypal data needs to be grouped by invoice.
         ArrayList<PaypalGrouped> groupedPaypal = group(rawPaypal);
     }
-    
-    private ArrayList<PaypalGrouped> group(ArrayList<Paypal> paypal) {
-        ArrayList<PaypalGrouped> groups = new ArrayList<>();
-        
+
+    private ArrayList<PaypalGrouped> group(ArrayList<Paypal> paypal)
+    {
         // 1. Sort rawPaypal by InvoiceDate for grouping.
-        rawPaypal.sort(new PaypalComparatorInvoiceDate());
+        paypal.sort(new PaypalComparatorInvoiceDate());
+
+        // 2. Instantiate ArrayLists
+        ArrayList<PaypalGrouped> groupedPaypal = new ArrayList<>();
+
+        // 3. Group raw PayPal data by non-blank invoice number only.
+        for (int i = 0; i < paypal.size(); i++)
+        {
+            Paypal current = paypal.get(i);
+            String invoice = current.getInvoiceNumber();
+            String date    = current.getDate();
+
+            // Skip entries with blank invoice numbers.
+            if (invoice.isEmpty()) continue;
+
+            boolean isFirstEntry = groupedPaypal.isEmpty();
+            boolean isSameGroup  = !isFirstEntry && invoice.equals(groupedPaypal.getLast().getInvoiceNumber());
+
+            if (isSameGroup)
+            {
+                groupedPaypal.getLast().getMembers().add(current);
+            }
+            else
+            {
+                groupedPaypal.add(new PaypalGrouped(invoice, date, current));
+            }
+        }
+        return groupedPaypal;
     }
 }
