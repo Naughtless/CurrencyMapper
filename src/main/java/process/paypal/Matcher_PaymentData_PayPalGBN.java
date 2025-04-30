@@ -109,8 +109,8 @@ public class Matcher_PaymentData_PayPalGBN
                 // Match found, add it to the sidMatches.
                 // First need to spoof a 'PayPalGBInvoice' object.
                 PaypalGrouped spoof = new PaypalGrouped();
-                spoof.setAudNet(amount);
-                spoof.setCurrency("Refund");
+//                spoof.setAudNet(amount);
+//                spoof.setCurrency("Refund");
                 spoof.setDate("");
                 spoof.setName("");
                 spoof.setInvoiceNumber("");

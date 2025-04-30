@@ -4,7 +4,7 @@ public class ConsoleMessage
 {
     public static void error(Exception x, String message) 
     {
-        System.out.println(Ansi.DARK_YELLOW + Ansi.BACKGROUND_RED + "ERROR: " + message + Ansi.RESET);
+        System.out.println(Ansi.BLACK + Ansi.BACKGROUND_RED + "ERROR: " + message + Ansi.RESET);
         throw new RuntimeException(x);
     }
     
@@ -27,6 +27,11 @@ public class ConsoleMessage
     public static void choice(String choice, String value)
     {
         System.out.println(Ansi.PURPLE + "[" + Ansi.BOLD + Ansi.GREEN +  choice + Ansi.RESET + Ansi.PURPLE + "]" + Ansi.RESET + Ansi.BLUE + " " + value + Ansi.RESET);
+    }
+    
+    public static void debug(String message)
+    {
+        System.out.println(Ansi.DARK_GREEN+ "DEBUG: " + message + Ansi.RESET );
     }
     
     public static void dv()

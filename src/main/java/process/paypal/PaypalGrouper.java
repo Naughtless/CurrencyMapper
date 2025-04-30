@@ -69,7 +69,8 @@ public class PaypalGrouper
 
     public void calculate() {
         for(PaypalGrouped pp: groupedArray) {
-            pp.calculate();
+            // TO BE DEPRECATED ANYWAYS. COmmented to allow building.
+//            pp.calculate();
         }
     }
 

@@ -5,7 +5,7 @@ import main.java.common.PaymentData;
 import main.java.process.paypal.model.PaypalGrouped;
 
 public class MatchPDPP implements CSV {
-    private static String header = PaymentData.getHeader() + "||" + PaypalGrouped.getHeader();
+    private static String header = PaymentData.getHeader() + "||";// + PaypalGrouped.getHeader();
 
     private PaymentData   payment;
     private PaypalGrouped paypal;
@@ -19,14 +19,14 @@ public class MatchPDPP implements CSV {
     public String buildCSVLine() {
         if(payment.getCurrency().trim().equals("AUD")) {
             double gst = Double.parseDouble(payment.getGst().trim());
-            double net = Double.parseDouble(paypal.getAudNet().replaceAll(",", "").trim());
+            double net = 0; // Double.parseDouble(paypal.getAudNet().replaceAll(",", "").trim());
 
             net -= gst;
 
             StringBuilder sb = new StringBuilder();
 
             sb.append(net).append("|");
-            sb.append(paypal.getCurrency()).append("|");
+//            sb.append(paypal.getCurrency()).append("|");
             sb.append(paypal.getDate()).append("|");
             sb.append(paypal.getName()).append("|");
             sb.append(paypal.getInvoiceNumber()).append("|");
@@ -35,7 +35,7 @@ public class MatchPDPP implements CSV {
             return payment.buildCSVLine() + "|" + sb.toString();
         }
         else {
-            return payment.buildCSVLine() + "|" + paypal.buildCSVLine();
+            return payment.buildCSVLine() + "|"; // + paypal.buildCSVLine();
         }
 
     }

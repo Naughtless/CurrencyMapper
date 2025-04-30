@@ -1,5 +1,8 @@
 package main.java.common;
 
+import main.java.util.DateParser;
+
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Paypal
@@ -185,6 +188,15 @@ public class Paypal
     @Override
     public String toString() {
         return buildCSVLine();
+    }
+    
+    public String getStudentId() {
+        // Note: This is prone to breaking!
+        return getInvoiceNumber().split("-")[1];
+    }
+    
+    public LocalDate getParsedDate() {
+        return DateParser.parseDate(getDate());
     }
 
     //</editor-fold>

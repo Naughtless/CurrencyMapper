@@ -19,6 +19,7 @@ public class ExchangerateModule
 
     public ArrayList<Match> getMatches()
     {
-
+        // Temp.
+        return null;
     }
 }

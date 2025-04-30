@@ -5,40 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1bd7d7c-5c4a-49b7-af67-c97b47002120" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/common/AfterpayRate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/util/DateParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/write/CSVWriter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/rates.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sources/AfterPay Rate.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/~$WORKSPACE.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/afterpay/AfterPayRateProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/afterpay/AfterPayRateProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/matches.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/no_matches.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/WORKSPACE.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/sources/WORKSPACE.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/Paypal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Paypal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/process/afterpay/AfterpayModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/afterpay/AfterpayModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/afterpay/MatchAfterPay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/afterpay/MatchAfterPay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/afterpay/model/AfterpayRate.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/common/CSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/CSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/common/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/common/PaymentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/PaymentData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/process/exchangerate/ExchangerateModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/ExchangerateModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/exchangerate/ExchangerateSourceGrouper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/ExchangerateSourceGrouper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/exchangerate/MatchPDExc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/MatchPDExc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/exchangerate/Matcher_ExchangeRate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/Matcher_ExchangeRate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/exchangerate/comparator/ExchangeRateComparatorSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/comparator/ExchangeRateComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/exchangerate/model/ExchangeRate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/ExchangeRate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/exchangerate/model/ExchangeRateGrouped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/model/ExchangeRateGrouped.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/process/paypal/MatchPDPP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/MatchPDPP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/process/paypal/Matcher_PaymentData_PayPalGBN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/Matcher_PaymentData_PayPalGBN.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/process/paypal/PaypalGrouper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/PaypalGrouper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/process/paypal/PaypalModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/PaypalModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/paypal/comparator/PaypalComparatorInvoiceDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/comparator/PaypalComparatorInvoiceDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/paypal/comparator/PaypalGBInvoiceComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/comparator/PaypalGroupedComparator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/paypal/model/Paypal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Paypal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/process/paypal/model/PaypalGrouped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/model/PaypalGrouped.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/read/AfterpayReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/AfterpayReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/read/ExchangeRateReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/ExchangeRateReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/read/PaymentDataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/PaymentDataReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/read/PaypalReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/PaypalReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/runners/ConsoleApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/runners/ConsoleApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/write/OldWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/write/OldWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/ConsoleMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/ConsoleMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/write/CSVWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/write/CSVWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,21 +47,58 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ConsoleApp.executor": "Run",
+    "Application.Experiments.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RunManager" selected="Application.ConsoleApp">
+    <configuration name="ConsoleApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.java.runners.ConsoleApp" />
+      <module name="CurrencyMapper" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.runners.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Experiments" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sandbox.Experiments" />
+      <module name="CurrencyMapper" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sandbox.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ConsoleApp" />
+        <item itemvalue="Application.Experiments" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,11 +115,38 @@
       <option name="presentableId" value="Default" />
       <updated>1745295993756</updated>
       <workItem from="1745295995131" duration="14992000" />
-      <workItem from="1745377691669" duration="12510000" />
+      <workItem from="1745377691669" duration="37733000" />
+      <workItem from="1745895088097" duration="13203000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/process/paypal/PaypalModule.java</url>
+          <line>369</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/process/paypal/PaypalModule.java</url>
+          <line>322</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/process/paypal/PaypalModule.java</url>
+          <line>254</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/process/paypal/PaypalModule.java</url>
+          <line>183</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

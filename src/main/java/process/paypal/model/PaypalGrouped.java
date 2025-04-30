@@ -12,17 +12,17 @@ import java.util.Objects;
 
 public class PaypalGrouped
 {
-    private ArrayList<Paypal> members   = new ArrayList<>();
+    private ArrayList<Paypal> members = new ArrayList<>();
 
     /* Common Denominators */
     private String invoiceNumber; // Obtained during instantiation
     private String date; // Obtained during instantiation
     private String studentId; // Obtained during instantiation, extracted from invoiceNumber
-    
-    private String name; // Obtained during getCommons()
+
+    private String    name; // Obtained during getCommons()
     private LocalDate parsedDate; // Obtained during getCommons()
-    
-    
+
+
     public PaypalGrouped()
     {}
 
@@ -36,23 +36,25 @@ public class PaypalGrouped
     }
 
 
-    public void getCommons() {
-        for (Paypal currentMember : members) {
+    public void getCommons()
+    {
+        for (Paypal currentMember : members)
+        {
             // NAME - Has to be the same, so get any.
-            if(!currentMember.getName().trim().isEmpty())
+            if (!currentMember.getName().trim().isEmpty())
             {
                 this.name = currentMember.getName();
             }
-            
+
             // PARSED DATE - Should also be the same across the same invoice.
-            if(!currentMember.getDate().trim().isEmpty())
+            if (!currentMember.getDate().trim().isEmpty())
             {
                 this.parsedDate = DateParser.parseDate(currentMember.getDate());
             }
-            
+
         }
     }
-    
+
 
     //<editor-fold desc="Getters & Setters">
     public ArrayList<Paypal> getMembers()

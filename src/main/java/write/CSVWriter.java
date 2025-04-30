@@ -1,6 +1,8 @@
 package main.java.write;
 
-import main.models.interfaces.CSV;
+
+
+import main.java.common.CSV;
 
 import java.io.*;
 import java.util.List;
