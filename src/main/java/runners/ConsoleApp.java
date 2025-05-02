@@ -1,36 +1,27 @@
 package main.java.runners;
 
-import main.java.process.afterpay.AfterpayModule;
-import main.java.common.AfterpayRate;
 import main.java.common.Match;
-import main.java.common.ExchangeRate;
-import main.java.common.Paypal;
+import main.java.process.afterpay.AfterpayModule;
+import main.java.process.afterpay.model.AfterpayRate;
+import main.java.process.exchangerate.model.ExchangeRate;
+import main.java.process.paypal.model.PayPal;
 import main.java.process.exchangerate.ExchangerateModule;
-import main.java.process.paypal.PaypalModule;
+import main.java.process.paypal.PayPalModule;
 import main.java.read.AfterpayReader;
 import main.java.user.UserInputGUI;
-import main.java.util.Ansi;
 import main.java.util.ConsoleMessage;
-import main.java.process.afterpay.MatchAfterPay;
-import main.java.process.exchangerate.MatchPDExc;
-import main.java.process.paypal.MatchPDPP;
 import main.java.common.PaymentData;
-import main.java.process.exchangerate.ExchangerateSourceGrouper;
-import main.java.process.paypal.PaypalGrouper;
-import main.java.process.afterpay.AfterPayRateProcessor;
-import main.java.process.exchangerate.Matcher_ExchangeRate;
-import main.java.process.paypal.Matcher_PaymentData_PayPalGBN;
 import main.java.read.ExchangeRateReader;
-import main.java.read.PaypalReader;
+import main.java.read.PayPalReader;
 import main.java.read.PaymentDataReader;
-import main.java.write.OldWriter;
 
 import java.io.*;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class ConsoleApp
 {
+    public static boolean DEBUG_MODE = false;
+    
     public static void main(String[] args)
             throws IOException
     {
@@ -52,19 +43,19 @@ public class ConsoleApp
             }
         }
     }
-
+    
     public static void currencyMapper()
     {
         // 1A. Read master data: PaymentData.
-        String                 masterDir = UserInputGUI.getFileName("PaymentData");
+        String                 masterDir = UserInputGUI.getFileName("Payment-Data");
         ArrayList<PaymentData> rawMaster = new PaymentDataReader().readPaymentData(masterDir);
 
         // 1B. Read external data: PayPal.
         String            paypalDir = UserInputGUI.getFileName("PayPal");
-        ArrayList<Paypal> rawPaypal = new PaypalReader().readPayPal(paypalDir);
+        ArrayList<PayPal> rawPayPal = new PayPalReader().readPayPal(paypalDir);
 
         // 1C. Read external data: ExchangeRate.
-        String                  exchrateDir = UserInputGUI.getFileName("ExchangeRate");
+        String                  exchrateDir = UserInputGUI.getFileName("Exchange Rate");
         ArrayList<ExchangeRate> rawExchrate = new ExchangeRateReader().readExchangeRate(exchrateDir);
 
         // 1D. Read external data: AfterPay.
@@ -75,24 +66,43 @@ public class ConsoleApp
         ArrayList<Match> matches = new ArrayList<>();
 
         // 2A. Process: PaymentData x PayPal
-        ArrayList<Match> ppMatches = new PaypalModule(rawMaster, rawPaypal).getMatches();
+        PayPalModule     paypalModule = new PayPalModule(rawMaster, rawPayPal);
+        ArrayList<Match> ppMatches    = paypalModule.getMatches();
         matches.addAll(ppMatches);
-        
-        /* CURRENT PROGRESS IS HERE */
+        ConsoleMessage.info(
+                "Results, PaymentData x PayPal: "
+                + "\n-> Matches: " + ppMatches.size()
+                + "\n-> No-Matches: " + paypalModule.getRemainder()
+        );
+        ConsoleMessage.br();
         
         // 2B. Process: PaymentData x ExchangeRate
-        ArrayList<Match> erMatches = new ExchangerateModule(rawMaster, rawExchrate).getMatches();
+        ExchangerateModule exchangerateModule = new ExchangerateModule(rawMaster, rawExchrate);
+        ArrayList<Match> erMatches = exchangerateModule.getMatches();
         matches.addAll(erMatches);
-        
+        ConsoleMessage.info(
+                "Results, PaymentData x ExchangeRate: "
+                + "\n-> Matches: " + erMatches.size()
+                + "\n-> No-Matches: " + exchangerateModule.getRemainder()
+        );
+        ConsoleMessage.br();
+
         // 2C. Process: PaymentData x AfterPay
-        ArrayList<Match> apMatches = new AfterpayModule(rawMaster, afterpayRate).getMatches();
+        AfterpayModule afterpayModule = new AfterpayModule(rawMaster, afterpayRate);
+        ArrayList<Match> apMatches = afterpayModule.getMatches();
         matches.addAll(apMatches);
+        ConsoleMessage.info(
+                "Results, PaymentData x AfterPay: "
+                + "\n-> Matches: " + apMatches.size()
+                + "\n-> No-Matches: " + afterpayModule.getRemainder()
+        );
+        ConsoleMessage.br();
     }
 
     
     /* OLD & NEW BARRIER -------------------------------------- */
     
-    
+    //<editor-fold desc="OLD CODE">
 //    public static void start(BufferedReader uReader)
 //    {
 //        //<editor-fold desc="Read Source Files">
@@ -354,4 +364,5 @@ public class ConsoleApp
 //        //</editor-fold>
 //        //</editor-fold>
 //    }
+    //</editor-fold>
 }

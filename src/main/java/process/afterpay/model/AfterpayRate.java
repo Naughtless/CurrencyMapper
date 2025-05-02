@@ -1,4 +1,4 @@
-package main.java.common;
+package main.java.process.afterpay.model;
 
 public class AfterpayRate
 {
@@ -12,7 +12,7 @@ public class AfterpayRate
         this.fee_flat = fee_flat;
         this.gst = gst;
     }
-    
+
     public double calculateNet(double amount) {
         // Formula fixed as of 22/04/2025
         return amount - (((amount * fee_percentage) + fee_flat) * (1 + gst));

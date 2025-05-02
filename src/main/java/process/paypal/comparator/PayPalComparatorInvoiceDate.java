@@ -1,13 +1,13 @@
 package main.java.process.paypal.comparator;
 
-import main.java.common.Paypal;
+import main.java.process.paypal.model.PayPal;
 
 import java.util.Comparator;
 
-public class PaypalComparatorInvoiceDate
-        implements Comparator<Paypal> {
+public class PayPalComparatorInvoiceDate
+        implements Comparator<PayPal> {
     @Override
-    public int compare(Paypal p1, Paypal p2) {
+    public int compare(PayPal p1, PayPal p2) {
         int invoiceComparison = p1.getInvoiceNumber().compareTo(p2.getInvoiceNumber());
         if (invoiceComparison != 0) {
             return invoiceComparison;

@@ -18,9 +18,9 @@ public class UserInputGUI
             ConsoleMessage.dv();
             ConsoleMessage.info("Actions available:");
 
-            ConsoleMessage.choice("1", "Start");
+            ConsoleMessage.choice("1", "Currency Mapper");
 
-            ConsoleMessage.input("What would you like to do?");
+            ConsoleMessage.input("Which script would you like to run?");
 
             String selectionInput = "0";
 
@@ -51,7 +51,7 @@ public class UserInputGUI
         }
 
         // Prompt user selection.
-        ConsoleMessage.input("Specify " + Ansi.BOLD + Ansi.RED + instruction + Ansi.RESET + Ansi.YELLOW + " source file!");
+        ConsoleMessage.input("Specify " + Ansi.BOLD + Ansi.DARK_GREEN + instruction + Ansi.RESET + " source file!");
 
         BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
         String userSource              = "";

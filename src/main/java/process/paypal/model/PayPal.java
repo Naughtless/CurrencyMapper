@@ -1,11 +1,12 @@
-package main.java.common;
+package main.java.process.paypal.model;
 
+import main.java.common.CSV;
 import main.java.util.DateParser;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Paypal
+public class PayPal
         implements CSV
 {
     //<editor-fold desc="Properties">
@@ -62,9 +63,9 @@ public class Paypal
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
-    public Paypal() {}
+    public PayPal() {}
 
-    public Paypal(String date, String time, String timezone, String name, String type, String status, String currency, String gross, String fee, String net, String fromEmail, String toEmail, String transactionId, String counterpartyStatus, String addressStatus, String gst, String referenceTxnId, String invoiceNumber, String receiptId, String balance, String contactPhoneNumber, String subject, String note, String paymentMethod, String cardType, String transactionEventCode, String paymentTrackingId, String bankReferenceId, String buyerCountryCode, String vouchers, String specialOffers, String loyaltyCardNumber, String balanceImpact, String buyerWallet, String tip, String discount, String sellerId, String riskFilter, String creditTransactionalFee, String creditPromotionalFee, String creditTerm, String creditOfferType, String originalInvoiceId, String paymentSourceSubtype, String campaignFee, String campaignName, String campaignDiscount, String campaignDiscountCurrency) {
+    public PayPal(String date, String time, String timezone, String name, String type, String status, String currency, String gross, String fee, String net, String fromEmail, String toEmail, String transactionId, String counterpartyStatus, String addressStatus, String gst, String referenceTxnId, String invoiceNumber, String receiptId, String balance, String contactPhoneNumber, String subject, String note, String paymentMethod, String cardType, String transactionEventCode, String paymentTrackingId, String bankReferenceId, String buyerCountryCode, String vouchers, String specialOffers, String loyaltyCardNumber, String balanceImpact, String buyerWallet, String tip, String discount, String sellerId, String riskFilter, String creditTransactionalFee, String creditPromotionalFee, String creditTerm, String creditOfferType, String originalInvoiceId, String paymentSourceSubtype, String campaignFee, String campaignName, String campaignDiscount, String campaignDiscountCurrency) {
         this.date = date;
         this.time = time;
         this.timezone = timezone;
@@ -115,6 +116,7 @@ public class Paypal
         this.campaignDiscountCurrency = campaignDiscountCurrency;
     }
     //</editor-fold>
+    
 
     //<editor-fold desc="Methods">
     public String buildCSVLine() {
@@ -173,21 +175,169 @@ public class Paypal
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
+    public boolean equals(Object o)
+    {
         if (o == null || getClass() != o.getClass()) return false;
-        Paypal payPal = (Paypal) o;
-        return Objects.equals(date, payPal.date) && Objects.equals(time, payPal.time) && Objects.equals(timezone, payPal.timezone) && Objects.equals(name, payPal.name) && Objects.equals(type, payPal.type) && Objects.equals(status, payPal.status) && Objects.equals(currency, payPal.currency) && Objects.equals(gross, payPal.gross) && Objects.equals(fee, payPal.fee) && Objects.equals(net, payPal.net) && Objects.equals(fromEmail, payPal.fromEmail) && Objects.equals(toEmail, payPal.toEmail) && Objects.equals(transactionId, payPal.transactionId) && Objects.equals(counterpartyStatus, payPal.counterpartyStatus) && Objects.equals(addressStatus, payPal.addressStatus) && Objects.equals(gst, payPal.gst) && Objects.equals(referenceTxnId, payPal.referenceTxnId) && Objects.equals(invoiceNumber, payPal.invoiceNumber) && Objects.equals(receiptId, payPal.receiptId) && Objects.equals(balance, payPal.balance) && Objects.equals(contactPhoneNumber, payPal.contactPhoneNumber) && Objects.equals(subject, payPal.subject) && Objects.equals(note, payPal.note) && Objects.equals(paymentMethod, payPal.paymentMethod) && Objects.equals(cardType, payPal.cardType) && Objects.equals(transactionEventCode, payPal.transactionEventCode) && Objects.equals(paymentTrackingId, payPal.paymentTrackingId) && Objects.equals(bankReferenceId, payPal.bankReferenceId) && Objects.equals(buyerCountryCode, payPal.buyerCountryCode) && Objects.equals(vouchers, payPal.vouchers) && Objects.equals(specialOffers, payPal.specialOffers) && Objects.equals(loyaltyCardNumber, payPal.loyaltyCardNumber) && Objects.equals(balanceImpact, payPal.balanceImpact) && Objects.equals(buyerWallet, payPal.buyerWallet) && Objects.equals(tip, payPal.tip) && Objects.equals(discount, payPal.discount) && Objects.equals(sellerId, payPal.sellerId) && Objects.equals(riskFilter, payPal.riskFilter) && Objects.equals(creditTransactionalFee, payPal.creditTransactionalFee) && Objects.equals(creditPromotionalFee, payPal.creditPromotionalFee) && Objects.equals(creditTerm, payPal.creditTerm) && Objects.equals(creditOfferType, payPal.creditOfferType) && Objects.equals(originalInvoiceId, payPal.originalInvoiceId) && Objects.equals(paymentSourceSubtype, payPal.paymentSourceSubtype) && Objects.equals(campaignFee, payPal.campaignFee) && Objects.equals(campaignName, payPal.campaignName) && Objects.equals(campaignDiscount, payPal.campaignDiscount) && Objects.equals(campaignDiscountCurrency, payPal.campaignDiscountCurrency);
+        PayPal paypal = (PayPal) o;
+        return Objects.equals(date, paypal.date) && Objects.equals(
+                time,
+                paypal.time
+        ) && Objects.equals(
+                timezone,
+                paypal.timezone
+        ) && Objects.equals(name, paypal.name) && Objects.equals(
+                type,
+                paypal.type
+        ) && Objects.equals(status, paypal.status) && Objects.equals(
+                currency,
+                paypal.currency
+        ) && Objects.equals(gross, paypal.gross) && Objects.equals(
+                fee,
+                paypal.fee
+        ) && Objects.equals(net, paypal.net) && Objects.equals(
+                fromEmail,
+                paypal.fromEmail
+        ) && Objects.equals(
+                toEmail,
+                paypal.toEmail
+        ) && Objects.equals(transactionId, paypal.transactionId) && Objects.equals(
+                counterpartyStatus,
+                paypal.counterpartyStatus
+        ) && Objects.equals(addressStatus, paypal.addressStatus) && Objects.equals(
+                gst,
+                paypal.gst
+        ) && Objects.equals(referenceTxnId, paypal.referenceTxnId) && Objects.equals(
+                invoiceNumber,
+                paypal.invoiceNumber
+        ) && Objects.equals(receiptId, paypal.receiptId) && Objects.equals(
+                balance,
+                paypal.balance
+        ) && Objects.equals(
+                contactPhoneNumber,
+                paypal.contactPhoneNumber
+        ) && Objects.equals(
+                subject,
+                paypal.subject
+        ) && Objects.equals(note, paypal.note) && Objects.equals(
+                paymentMethod,
+                paypal.paymentMethod
+        ) && Objects.equals(
+                cardType,
+                paypal.cardType
+        ) && Objects.equals(
+                transactionEventCode,
+                paypal.transactionEventCode
+        ) && Objects.equals(
+                paymentTrackingId,
+                paypal.paymentTrackingId
+        ) && Objects.equals(bankReferenceId, paypal.bankReferenceId) && Objects.equals(
+                buyerCountryCode,
+                paypal.buyerCountryCode
+        ) && Objects.equals(
+                vouchers,
+                paypal.vouchers
+        ) && Objects.equals(specialOffers, paypal.specialOffers) && Objects.equals(
+                loyaltyCardNumber,
+                paypal.loyaltyCardNumber
+        ) && Objects.equals(balanceImpact, paypal.balanceImpact) && Objects.equals(
+                buyerWallet,
+                paypal.buyerWallet
+        ) && Objects.equals(
+                tip,
+                paypal.tip
+        ) && Objects.equals(discount, paypal.discount) && Objects.equals(
+                sellerId,
+                paypal.sellerId
+        ) && Objects.equals(riskFilter, paypal.riskFilter) && Objects.equals(
+                creditTransactionalFee,
+                paypal.creditTransactionalFee
+        ) && Objects.equals(
+                creditPromotionalFee,
+                paypal.creditPromotionalFee
+        ) && Objects.equals(creditTerm, paypal.creditTerm) && Objects.equals(
+                creditOfferType,
+                paypal.creditOfferType
+        ) && Objects.equals(
+                originalInvoiceId,
+                paypal.originalInvoiceId
+        ) && Objects.equals(
+                paymentSourceSubtype,
+                paypal.paymentSourceSubtype
+        ) && Objects.equals(campaignFee, paypal.campaignFee) && Objects.equals(
+                campaignName,
+                paypal.campaignName
+        ) && Objects.equals(campaignDiscount, paypal.campaignDiscount) && Objects.equals(
+                campaignDiscountCurrency,
+                paypal.campaignDiscountCurrency
+        );
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(date, time, timezone, name, type, status, currency, gross, fee, net, fromEmail, toEmail, transactionId, counterpartyStatus, addressStatus, gst, referenceTxnId, invoiceNumber, receiptId, balance, contactPhoneNumber, subject, note, paymentMethod, cardType, transactionEventCode, paymentTrackingId, bankReferenceId, buyerCountryCode, vouchers, specialOffers, loyaltyCardNumber, balanceImpact, buyerWallet, tip, discount, sellerId, riskFilter, creditTransactionalFee, creditPromotionalFee, creditTerm, creditOfferType, originalInvoiceId, paymentSourceSubtype, campaignFee, campaignName, campaignDiscount, campaignDiscountCurrency);
+    public int hashCode()
+    {
+        return Objects.hash(
+                date,
+                time,
+                timezone,
+                name,
+                type,
+                status,
+                currency,
+                gross,
+                fee,
+                net,
+                fromEmail,
+                toEmail,
+                transactionId,
+                counterpartyStatus,
+                addressStatus,
+                gst,
+                referenceTxnId,
+                invoiceNumber,
+                receiptId,
+                balance,
+                contactPhoneNumber,
+                subject,
+                note,
+                paymentMethod,
+                cardType,
+                transactionEventCode,
+                paymentTrackingId,
+                bankReferenceId,
+                buyerCountryCode,
+                vouchers,
+                specialOffers,
+                loyaltyCardNumber,
+                balanceImpact,
+                buyerWallet,
+                tip,
+                discount,
+                sellerId,
+                riskFilter,
+                creditTransactionalFee,
+                creditPromotionalFee,
+                creditTerm,
+                creditOfferType,
+                originalInvoiceId,
+                paymentSourceSubtype,
+                campaignFee,
+                campaignName,
+                campaignDiscount,
+                campaignDiscountCurrency
+        );
     }
 
     @Override
     public String toString() {
-        return buildCSVLine();
+        return(
+                getDate() + "|"
+                + getStudentId() + "|"
+                + getName() + "|"
+                + getType() + "|"
+                + getCurrency() + "|"
+                + getGross() + "|"
+                + getInvoiceNumber()
+                );
     }
     
     public String getStudentId() {
@@ -207,7 +357,7 @@ public class Paypal
     }
 
     public static void setHeader(String header) {
-        Paypal.header = header;
+        PayPal.header = header;
     }
 
     public String getDate() {

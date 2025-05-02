@@ -1,6 +1,7 @@
 package main.java.read;
 
-import main.java.common.AfterpayRate;
+import main.java.process.afterpay.AfterpayModule;
+import main.java.process.afterpay.model.AfterpayRate;
 import main.java.util.ConsoleMessage;
 
 import java.io.BufferedReader;

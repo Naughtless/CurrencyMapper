@@ -1,23 +1,23 @@
 package main.java.read;
 
-import main.java.common.Paypal;
+import main.java.process.paypal.model.PayPal;
 import main.java.read.common.CSVReader;
 
 import java.util.ArrayList;
 
-public class PaypalReader
+public class PayPalReader
         extends CSVReader
 {
-    public ArrayList<Paypal> readPayPal(String dir)
+    public ArrayList<PayPal> readPayPal(String dir)
     {
         ArrayList<String[]> results  = super.read(dir);
-        ArrayList<Paypal>   contents = new ArrayList<>();
+        ArrayList<PayPal>   contents = new ArrayList<>();
 
         for (int i = 0; i < results.size(); i++)
         {
             if (i > 0)
             {
-                contents.add(new Paypal(
+                contents.add(new PayPal(
                         results.get(i)[0].trim(),
                         results.get(i)[1].trim(),
                         results.get(i)[2].trim(),

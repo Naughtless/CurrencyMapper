@@ -1,6 +1,6 @@
 package main.java.read;
 
-import main.java.common.ExchangeRate;
+import main.java.process.exchangerate.model.ExchangeRate;
 import main.java.read.common.CSVReader;
 
 import java.util.ArrayList;

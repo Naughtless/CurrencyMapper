@@ -2,26 +2,26 @@ package main.java.process.paypal;
 
 import main.java.common.Match;
 import main.java.common.PaymentData;
-import main.java.process.paypal.comparator.PaypalComparatorInvoiceDate;
-import main.java.process.paypal.model.PaypalGrouped;
-import main.java.common.Paypal;
+import main.java.process.paypal.comparator.PayPalComparatorInvoiceDate;
+import main.java.process.paypal.comparator.PayPalGroupedComparator;
+import main.java.process.paypal.model.PayPalGrouped;
+import main.java.process.paypal.model.PayPal;
 import main.java.util.ConsoleMessage;
 import main.java.util.DateParser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.stream.Collectors;
 
-public class PaypalModule
+public class PayPalModule
 {
     private ArrayList<PaymentData> rawMaster;
-    private ArrayList<Paypal>      rawPaypal;
+    private ArrayList<PayPal>      rawPayPal;
 
-    public PaypalModule(ArrayList<PaymentData> rawMaster, ArrayList<Paypal> rawPaypal)
+    public PayPalModule(ArrayList<PaymentData> rawMaster, ArrayList<PayPal> rawPayPal)
     {
         this.rawMaster = rawMaster;
-        this.rawPaypal = rawPaypal;
+        this.rawPayPal = rawPayPal;
     }
 
     public ArrayList<Match> getMatches()
@@ -37,25 +37,45 @@ public class PaypalModule
          */
 
         // 1. Paypal data needs to be grouped by invoice.
-        ArrayList<PaypalGrouped> groupedPaypal = groupPayments(rawPaypal);
-        ArrayList<Paypal>        refunds       = getRefunds(rawPaypal);
+        ArrayList<PayPalGrouped> groupedPaypal = getPaypalGroups(rawPayPal);
+        /* DEBUG */
+        ConsoleMessage.debug("Number of PaypalGrouped: " + groupedPaypal.size());
+        int debugCounter1 = 0;
+        for(PayPalGrouped paypalGrouped : groupedPaypal)
+        {
+            debugCounter1++;
+            ConsoleMessage.debug("PaypalGrouped #" + debugCounter1 + ": " + paypalGrouped.toString());
+
+        }
+        
+        ArrayList<PayPal> refunds = getPaypalRefunds(rawPayPal);
+        /* DEBUG */
+        ConsoleMessage.debug("Number of Paypal refunds: " + refunds.size());
+        int debugCounter2 = 0;
+        for(PayPal ref : refunds)
+        {
+            debugCounter2++;
+            ConsoleMessage.debug("Paypal refunds #" + debugCounter2 + ": " + ref.toString());
+
+        }
+        
 
         // 2. Return matches between 'groupedPaypal' and 'rawMaster'
         return match(rawMaster, groupedPaypal, refunds);
     }
 
-    private ArrayList<PaypalGrouped> groupPayments(ArrayList<Paypal> paypal)
+    private ArrayList<PayPalGrouped> getPaypalGroups(ArrayList<PayPal> paypal)
     {
         // 1. Sort rawPaypal by InvoiceDate for grouping.
-        paypal.sort(new PaypalComparatorInvoiceDate());
+        paypal.sort(new PayPalComparatorInvoiceDate());
 
         // 2. Instantiate ArrayLists
-        ArrayList<PaypalGrouped> groupedPaypal = new ArrayList<>();
+        ArrayList<PayPalGrouped> groupedPaypal = new ArrayList<>();
 
         // 3. Group raw PayPal data by non-blank invoice number only.
         for (int i = 0; i < paypal.size(); i++)
         {
-            Paypal current = paypal.get(i);
+            PayPal current = paypal.get(i);
             String invoice = current.getInvoiceNumber();
             String date    = current.getDate();
 
@@ -75,18 +95,20 @@ public class PaypalModule
             }
             else
             {
-                groupedPaypal.add(new PaypalGrouped(invoice, date, current));
+                groupedPaypal.add(new PayPalGrouped(invoice, date, current));
             }
         }
 
         // 4. Run getCommons() on each Paypal group.
-        for (PaypalGrouped gr : groupedPaypal) gr.getCommons();
+        for (PayPalGrouped gr : groupedPaypal) gr.getCommons();
+
+        groupedPaypal.sort(new PayPalGroupedComparator());
 
         // 5. Return
         return groupedPaypal;
     }
 
-    private ArrayList<Paypal> getRefunds(ArrayList<Paypal> paypal)
+    private ArrayList<PayPal> getPaypalRefunds(ArrayList<PayPal> paypal)
     {
         // Use streams to filter "Payment Refund" into new array.
         return new ArrayList<>(paypal.stream()
@@ -101,8 +123,8 @@ public class PaypalModule
 
     private ArrayList<Match> match(
             ArrayList<PaymentData> rawMaster,
-            ArrayList<PaypalGrouped> paypalGrouped,
-            ArrayList<Paypal> paypalRefunds
+            ArrayList<PayPalGrouped> paypalGrouped,
+            ArrayList<PayPal> payPalRefunds
     )
     {
         /*
@@ -187,7 +209,7 @@ public class PaypalModule
                     if (searchResults == -1) continue;
                     foundMatch = true;
 
-                    PaypalGrouped ppg = paypalGrouped.get(searchResults);
+                    PayPalGrouped ppg = paypalGrouped.get(searchResults);
                     /*
                      Safety Checks for expected behaviour
                      - 'ppg' should only have length of 1.
@@ -218,23 +240,33 @@ public class PaypalModule
                         );
                     }
                     // gross and amount should be equals.
-                    if (!ppg.getMembers()
-                            .getFirst()
-                            .getGross()
-                            .equals(currentMaster.getAmount()))
+                    if (
+                            !(
+                                    Double.parseDouble(
+                                            ppg.getMembers()
+                                                    .getFirst()
+                                                    .getGross()
+                                    ) 
+                                    ==
+                                    Double.parseDouble(
+                                            currentMaster.getAmount())
+                            )
+                    )
                     {
-                        ConsoleMessage.error(
-                                new RuntimeException(),
-                                "Unexpected behaviour in 'PaypalModule', Category 1: PPgr gross mismatch with PD amount!" + "\nCPG gross: " + ppg.getMembers()
-                                        .getFirst()
-                                        .getGross() + "\nPD amount: " + currentMaster.getAmount()
+                        // This means that even though SID and dates matched, somehow the amount does not!
+                        ConsoleMessage.warning(
+                                "[PayPal] (CAT-1) Anomalous gross/amount mismatch for Student ID: " + currentMaster.getStudentId() + " -> Assuming 'Non-Match'."
+                                + " Despite SID & dates matching, gross/amount did not match:"
+                                + " (PD amount: " + currentMaster.getAmount()
+                                + ") (PPG amount: " + ppg.getMembers().getFirst().getGross() + ")"
                         );
+                        continue;
                     }
 
                     Match currentMatch = new Match(
                             currentMaster,
                             ppg.getMembers().getFirst(),
-                            "Already AUD, Payment",
+                            "PayPal, Already AUD",
                             false
                     );
                     matches.add(currentMatch);
@@ -258,15 +290,15 @@ public class PaypalModule
                     if (searchResults == -1) continue;
                     foundMatch = true;
 
-                    PaypalGrouped ppg = paypalGrouped.get(searchResults);
+                    PayPalGrouped ppg = paypalGrouped.get(searchResults);
 
                     // Logic to find which of the group of 3 in ppg's members contains AUD.
-                    ArrayList<Paypal> ppgMembers = ppg.getMembers();
-                    Paypal            target     = null;
+                    ArrayList<PayPal> ppgMembers = ppg.getMembers();
+                    PayPal            target     = null;
 
                     // First check the original currency.
                     boolean originalCurrencyMatchFound = false;
-                    for (Paypal cpp : ppgMembers)
+                    for (PayPal cpp : ppgMembers)
                     {
                         if (cpp.getType()
                                     .equals("Pre-approved Payment Bill User Payment") && (Double.parseDouble(
@@ -279,35 +311,30 @@ public class PaypalModule
                     // If original currency matches, find the converted value.
                     if (originalCurrencyMatchFound)
                     {
-                        for (Paypal cpp : ppgMembers)
+                        for (PayPal cpp : ppgMembers)
                         {
-                            if (
-                                    cpp.getType().equals("General Currency Conversion") 
-                                    && cpp.getCurrency().equals("AUD")
-                            )
+                            if (cpp.getType()
+                                        .equals("General Currency Conversion") && cpp.getCurrency()
+                                        .equals("AUD"))
                             {
                                 target = cpp;
                             }
-
                         }
                     }
                     else
                     {
-                        ConsoleMessage.debug("Comparing master: " + currentMaster.getPaymentType() + " " + currentMaster.getAmount());
-                        for(Paypal cpp : ppgMembers)
-                        {
-                            ConsoleMessage.debug("PaypalGroup: " + cpp.getType() + " " + cpp.getGross());
-                        }
-                        ConsoleMessage.error(
-                                new RuntimeException(),
-                                "Error in Category 2!"
+                        // This means FOUND, but somehow the currencies or something do not match!
+                        ConsoleMessage.warning(
+                                "[PayPal] (CAT-2) Anomalous currency mismatch for Student ID: " + currentMaster.getStudentId() + " -> Assuming 'Non-Match'."
+                                + " Despite SID & dates matching, currencies did not match!"
                         );
+                        continue;
                     }
-                    
+
                     Match currentMatch = new Match(
                             currentMaster,
                             target,
-                            "Converted, Payment",
+                            "PayPal, Converted",
                             false
                     );
                     matches.add(currentMatch);
@@ -327,11 +354,11 @@ public class PaypalModule
                  */
                 else if (currency.equals("AUD") && paymentStatus.equals("Refund"))
                 {
-                    int searchResults = searchPaypal(paypalRefunds, studentId, date);
+                    int searchResults = searchPaypal(payPalRefunds, studentId, date);
                     if (searchResults == -1) continue;
                     foundMatch = true;
 
-                    Paypal pp = paypalRefunds.get(searchResults);
+                    PayPal pp = payPalRefunds.get(searchResults);
 
                     // pp should have type "Payment Refund"
                     if (!pp.getType().equals("Payment Refund"))
@@ -354,12 +381,12 @@ public class PaypalModule
                     Match currentMatch = new Match(
                             currentMaster,
                             pp,
-                            "Already AUD, Refund",
+                            "PayPal, Refund",
                             true
                     );
                     matches.add(currentMatch);
 
-                    paypalRefunds.remove(searchResults);
+                    payPalRefunds.remove(searchResults);
                 }
 
                 // 2D. Process: Category 4 (Not AUD, Refund)
@@ -374,11 +401,11 @@ public class PaypalModule
                  */
                 else if (!currency.equals("AUD") && paymentStatus.equals("Refund"))
                 {
-                    int searchResults = searchPaypal(paypalRefunds, studentId, date);
+                    int searchResults = searchPaypal(payPalRefunds, studentId, date);
                     if (searchResults == -1) continue;
                     foundMatch = true;
 
-                    Paypal pp = paypalRefunds.get(searchResults);
+                    PayPal pp = payPalRefunds.get(searchResults);
 
                     // pp should have type "Payment Refund"
                     if (!pp.getType().trim().equals("Payment Refund"))
@@ -401,12 +428,12 @@ public class PaypalModule
                     Match currentMatch = new Match(
                             currentMaster,
                             pp,
-                            "Converted, Refund",
+                            "PayPal, Refund",
                             true
                     );
                     matches.add(currentMatch);
 
-                    paypalRefunds.remove(searchResults);
+                    payPalRefunds.remove(searchResults);
                 }
 
                 // 2-Final. If a match was found, then remove it from the master array.
@@ -417,89 +444,23 @@ public class PaypalModule
 
         return matches;
     }
-
-    private int searchPaypalGroup(
-            ArrayList<PaypalGrouped> source,
-            String targetStudentId,
-            String targetDate
-    )
-    {
-        /* Note:
-         *  1. PayPal happens first, on avg. 1 day AHEAD of PaymentData record.
-         *  2. We are looking for PayPal based on desired PaymentData date.
-         *  3. PaymentData should have an added range of -3 DAYS before:
-         *      3a. In event that PaymentData is on MONDAY and PayPal happened on FRIDAY.
-         *          3aa. -1 from MONDAY is SUNDAY
-         *          3ab. -2 from MONDAY is SATURDAY
-         *          3ac. -3 from MONDAY is FRIDAY
-         * SO: We need to apply a "ranged searching". It can't be only one specific date.
-         * The ranged search will LOOKUP the PayPal 4 times, using PD's date: H, H-1, H-2, and H-3
-         */
-
-        int resultIndex = -1;
-
-        int lowIndex  = 0;
-        int highIndex = source.size() - 1;
-        int midIndex;
-
-        // Declare Payment Data Date & find its value.
-        LocalDate masterDate = DateParser.parseDate(targetDate);
-
-        // Declare the "ranged search" offset date (days BEFORE the payment_date).
-        LocalDate masterDateOffset = masterDate.minusDays(1);
-
-        // [OUTER LOOP] => We look for the matching SID first!
-        while (lowIndex <= highIndex)
+    
+    public int getRemainder() {
+        int counter = 0;
+        for(PaymentData pd : rawMaster)
         {
-            midIndex = lowIndex + ((highIndex - lowIndex) / 2);
-
-            // Extract studentId & date from the current PayPal group.
-            String paypalStudentId = source.get(midIndex).getStudentId().trim();
-            LocalDate paypalDate = source.get(midIndex).getParsedDate();
-
-            int strCompareValue = targetStudentId.compareTo(paypalStudentId);
-
-            if (strCompareValue < 0)
-            {
-                // Desired result in the LEFT RANGE.
-                highIndex = midIndex - 1;
-            }
-            else if (strCompareValue > 0)
-            {
-                // Desired result in the RIGHT RANGE.
-                lowIndex = midIndex + 1;
-            }
-            else
-            {
-                // FOUND DESIRED studentId -> Now search for the appropriate date!
-                if (paypalDate.isBefore(masterDateOffset))
-                {
-                    lowIndex = midIndex + 1;
-                }
-                else if (paypalDate.isAfter(masterDate))
-                {
-                    highIndex = midIndex - 1;
-                }
-                else
-                {
-                    // FOUND DESIRED DATE TOO!
-                    resultIndex = midIndex;
-                    break;
-                }
-            }
-        }
-        return resultIndex;
+            if(pd.getPaymentType().equals("PayPal")) counter++;
+        }   
+        
+        return counter;
     }
 
-    private int searchPaypal(
-            ArrayList<Paypal> source,
+    private int searchPaypalGroup(
+            ArrayList<PayPalGrouped> source,
             String targetStudentId,
             String targetDate
     )
     {
-        /* DEBUG */
-        ConsoleMessage.debug("Executing searchPaypal(), looking for SID: " + targetStudentId + " and DATE: " + targetDate);
-
         /* Note:
          *  1. PayPal happens first, on avg. 1 day AHEAD of PaymentData record.
          *  2. We are looking for PayPal based on desired PaymentData date.
@@ -511,6 +472,9 @@ public class PaypalModule
          * SO: We need to apply a "ranged searching". It can't be only one specific date.
          * The ranged search will LOOKUP the PayPal 4 times, using PD's date: H, H-1, H-2, and H-3
          */
+
+        /* DEBUG */
+        ConsoleMessage.debug("Executing searchPaypalGroup(), looking for SID: " + targetStudentId + ", DATE: " + targetDate);
 
         int resultIndex = -1;
 
@@ -528,19 +492,109 @@ public class PaypalModule
         int counter = 0;
         while (lowIndex <= highIndex)
         {
+            midIndex = lowIndex + ((highIndex - lowIndex) / 2);
+
             /* DEBUG */
             counter++;
-            ConsoleMessage.debug("Iteration #" + counter);
+            ConsoleMessage.debug("Iteration #" + counter + ": " + source.get(midIndex));
 
+            // Extract studentId & date from the current PayPal group.
+            String    paypalStudentId = source.get(midIndex).getStudentId().trim();
+            LocalDate paypalDate      = source.get(midIndex).getParsedDate();
+
+            int strCompareValue = targetStudentId.compareTo(paypalStudentId);
+
+            if (strCompareValue < 0)
+            {
+                // Desired result in the LEFT RANGE.
+                highIndex = midIndex - 1;
+                
+            }
+            else if (strCompareValue > 0)
+            {
+                // Desired result in the RIGHT RANGE.
+                lowIndex = midIndex + 1;
+            }
+            else
+            {
+                // FOUND DESIRED studentId -> Now search for the appropriate date!
+                if (paypalDate.isBefore(masterDateOffset))
+                {
+                    lowIndex = midIndex + 1;
+                }
+                else if (paypalDate.isAfter(masterDate))
+                {
+                    highIndex = midIndex - 1;
+                }
+                else
+                {
+                    /* DEBUG */
+                    ConsoleMessage.debug("Match found for SID: " + source.get(midIndex)
+                            .getStudentId()
+                    );
+                    
+                    // FOUND DESIRED DATE TOO!
+                    resultIndex = midIndex;
+                    break;
+                }
+            }
+        }
+
+        /* DEBUG */
+        if (resultIndex == -1)
+            ConsoleMessage.debug("Match not found for SID: " + targetStudentId);
+
+        return resultIndex;
+    }
+
+    private int searchPaypal(
+            ArrayList<PayPal> source,
+            String targetStudentId,
+            String targetDate
+    )
+    {
+        /* Note:
+         *  1. PayPal happens first, on avg. 1 day AHEAD of PaymentData record.
+         *  2. We are looking for PayPal based on desired PaymentData date.
+         *  3. PaymentData should have an added range of -3 DAYS before:
+         *      3a. In event that PaymentData is on MONDAY and PayPal happened on FRIDAY.
+         *          3aa. -1 from MONDAY is SUNDAY
+         *          3ab. -2 from MONDAY is SATURDAY
+         *          3ac. -3 from MONDAY is FRIDAY
+         * SO: We need to apply a "ranged searching". It can't be only one specific date.
+         * The ranged search will LOOKUP the PayPal 4 times, using PD's date: H, H-1, H-2, and H-3
+         */
+
+        /* DEBUG */
+        ConsoleMessage.debug("Executing searchPaypal(), looking for SID: " + targetStudentId + ", DATE: " + targetDate);
+
+
+        int resultIndex = -1;
+
+        int lowIndex  = 0;
+        int highIndex = source.size() - 1;
+        int midIndex;
+
+        // Declare Payment Data Date & find its value.
+        LocalDate masterDate = DateParser.parseDate(targetDate);
+
+        // Declare the "ranged search" offset date (days BEFORE the payment_date).
+        LocalDate masterDateOffset = masterDate.minusDays(1);
+
+        // [OUTER LOOP] => We look for the matching SID first!
+        int counter = 0;
+        while (lowIndex <= highIndex)
+        {
             // Get Mid Index
             midIndex = lowIndex + ((highIndex - lowIndex) / 2);
 
             /* DEBUG */
-            ConsoleMessage.debug("Search: " + source.get(midIndex));
+            counter++;
+            ConsoleMessage.debug("Iteration #" + counter + ": " + source.get(midIndex));
 
             // Extract studentId & date from the current PayPal group.
-            String paypalStudentId = source.get(midIndex).getStudentId().trim();
-            LocalDate paypalDate = source.get(midIndex).getParsedDate();
+            String    paypalStudentId = source.get(midIndex).getStudentId().trim();
+            LocalDate paypalDate      = source.get(midIndex).getParsedDate();
 
             int strCompareValue = targetStudentId.compareTo(paypalStudentId);
 
@@ -567,12 +621,21 @@ public class PaypalModule
                 }
                 else
                 {
+                    /* DEBUG */
+                    ConsoleMessage.debug("Match found for SID: " + source.get(midIndex)
+                            .getStudentId());
+
                     // FOUND DESIRED DATE TOO!
                     resultIndex = midIndex;
                     break;
                 }
             }
         }
+
+        /* DEBUG */
+        if (resultIndex == -1)
+            ConsoleMessage.debug("Match not found for SID: " + targetStudentId);
+
         return resultIndex;
     }
 }

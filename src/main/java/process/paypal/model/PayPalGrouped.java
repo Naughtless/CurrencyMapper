@@ -1,18 +1,13 @@
 package main.java.process.paypal.model;
 
-import main.java.common.Paypal;
-import main.java.util.ConsoleMessage;
-import main.java.common.CSV;
 import main.java.util.DateParser;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class PaypalGrouped
+public class PayPalGrouped
 {
-    private ArrayList<Paypal> members = new ArrayList<>();
+    private ArrayList<PayPal> members = new ArrayList<>();
 
     /* Common Denominators */
     private String invoiceNumber; // Obtained during instantiation
@@ -23,10 +18,10 @@ public class PaypalGrouped
     private LocalDate parsedDate; // Obtained during getCommons()
 
 
-    public PaypalGrouped()
+    public PayPalGrouped()
     {}
 
-    public PaypalGrouped(String invoiceNumber, String date, Paypal member)
+    public PayPalGrouped(String invoiceNumber, String date, PayPal member)
     {
         this.invoiceNumber = invoiceNumber;
         this.date = date;
@@ -38,7 +33,7 @@ public class PaypalGrouped
 
     public void getCommons()
     {
-        for (Paypal currentMember : members)
+        for (PayPal currentMember : members)
         {
             // NAME - Has to be the same, so get any.
             if (!currentMember.getName().trim().isEmpty())
@@ -54,15 +49,25 @@ public class PaypalGrouped
 
         }
     }
+    
+    @Override
+    public String toString() {
+        return(
+                getDate() + "|"
+                + getStudentId() + "|"
+                + getName() + "|"
+                + getInvoiceNumber()
+        );
+    }
 
 
     //<editor-fold desc="Getters & Setters">
-    public ArrayList<Paypal> getMembers()
+    public ArrayList<PayPal> getMembers()
     {
         return members;
     }
 
-    public void setMembers(ArrayList<Paypal> members)
+    public void setMembers(ArrayList<PayPal> members)
     {
         this.members = members;
     }

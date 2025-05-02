@@ -1,4 +1,4 @@
-package main.java.common;
+package main.java.process.exchangerate.model;
 
 import java.util.Objects;
 
