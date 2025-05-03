@@ -29,5 +29,8 @@ bin/
 .DS_Store
 
 ### Sensitive Customer Data !!! ###
-results/
-sources/
+results/*
+sources/*
+
+!"results/RESULTS WILL BE CREATED HERE"
+!"sources/PUT SOURCE FILES HERE"

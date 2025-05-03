@@ -10,9 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1bd7d7c-5c4a-49b7-af67-c97b47002120" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/CurrencyMapper_v2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/CurrencyMapper_v2_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -119,7 +117,7 @@
       <workItem from="1745295995131" duration="14992000" />
       <workItem from="1745377691669" duration="37733000" />
       <workItem from="1745895088097" duration="47271000" />
-      <workItem from="1746265553748" duration="387000" />
+      <workItem from="1746265553748" duration="943000" />
     </task>
     <servers />
   </component>

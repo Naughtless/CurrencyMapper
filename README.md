@@ -1,4 +1,4 @@
-# This is a private project.
+# This is a Private Project
 
 The source code is open to be studied, but the _**sensitive customer files**_ are not included. 
 
