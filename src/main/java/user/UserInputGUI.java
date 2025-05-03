@@ -47,6 +47,7 @@ public class UserInputGUI
         File[] files = new File("sources\\").listFiles(file -> file.isFile());
         ConsoleMessage.info("Source files detected:");
         for(int i = 0; i < files.length; i++) {
+            if(files[i].getName().equals("PUT SOURCE FILES HERE")) continue;
             ConsoleMessage.choice(String.valueOf((i + 1)), files[i].getName());
         }
 
