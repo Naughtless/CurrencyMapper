@@ -266,7 +266,7 @@ public class PayPalModule
                     Match currentMatch = new Match(
                             currentMaster,
                             ppg.getMembers().getFirst(),
-                            "PayPal, Already AUD",
+                            "PayPal - Already AUD",
                             false
                     );
                     matches.add(currentMatch);
@@ -334,7 +334,7 @@ public class PayPalModule
                     Match currentMatch = new Match(
                             currentMaster,
                             target,
-                            "PayPal, Converted",
+                            "PayPal - Converted",
                             false
                     );
                     matches.add(currentMatch);
@@ -381,7 +381,7 @@ public class PayPalModule
                     Match currentMatch = new Match(
                             currentMaster,
                             pp,
-                            "PayPal, Refund",
+                            "PayPal - Refund",
                             true
                     );
                     matches.add(currentMatch);
@@ -428,7 +428,7 @@ public class PayPalModule
                     Match currentMatch = new Match(
                             currentMaster,
                             pp,
-                            "PayPal, Refund",
+                            "PayPal - Refund",
                             true
                     );
                     matches.add(currentMatch);

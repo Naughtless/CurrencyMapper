@@ -1,0 +1,55 @@
+site|product_id|currency|legal_entity|studentid|fullname|student_status|paymentid|payment_type|item_type|payment_status|amount|gst|payment_date|module_start_date|module_end_date|schedule|enrolment_date|Addon
+piuk|11|GBP|No|24888|Andrew Miller|Active|2370795|PayPal|AdvMod|Paid|112.50|0.00|1/03/2025|1/03/2025|NULL|Full|28/09/2010|No
+idnz|7|NZD|No|183582|Ellen Bridge|Active|2373762|Wise|Ext3|Paid|99.00|0.00|11/03/2025|||Custom|12/04/2020|No
+idnz|7|NZD|No|183582|Ellen Bridge|Active|2373763|Wise|CourseFee|Paid|151.00|0.00|11/03/2025|||Custom|12/04/2020|No
+idau|13|AUD|No|194712|Amy Eccles|Active|2370673|PayPal|Ext12|Paid|199.00|0.00|1/03/2025|||Full|7/09/2020|No
+idau|13|AUD|No|196010|Natalie Birmingham|Active|2371892|PayPal|AdvMod|Paid|179.10|16.28|5/03/2025|5/03/2025|NULL|Monthly|20/09/2020|No
+idau|13|AUD|No|196010|Natalie Birmingham|Active|2371893|PayPal|AdvMod|Paid|179.10|16.28|5/03/2025|5/03/2025|NULL|Monthly|20/09/2020|No
+idbe|73|EUR|No|236614|Abigayl De Gobba|Active|2376903|PayPal|AdvMod|Paid|135.00|0.00|24/03/2025|24/03/2025|30/03/2025|Monthly|30/11/2021|No
+idbe|73|EUR|No|236614|Abigayl De Gobba|Active|2376904|PayPal|AdvMod|Paid|135.00|0.00|24/03/2025|24/03/2025|NULL|Monthly|30/11/2021|No
+idae|43|AED|No|254294|Shamsah AL Maazmi|Active|2375775|PayPal|Ext3|Paid|249.00|0.00|19/03/2025|||Full|22/09/2022|No
+idus|15|USD|No|259167|Rachel Florenza|Active|2375106|PayPal|AdvMod|Paid|179.10|0.00|16/03/2025|16/03/2025|NULL|Full|16/12/2022|No
+idae|43|AED|No|279260|Mohammed Ahmed Salah|Active|2378055|PayPal|AdvMod|Paid|494.10|0.00|27/03/2025|27/03/2025|NULL|Custom|12/01/2024|No
+idae|43|AED|No|279260|Mohammed Ahmed Salah|Active|2378056|PayPal|AdvMod|Paid|494.10|0.00|27/03/2025|27/03/2025|NULL|Custom|12/01/2024|No
+idsa|3|ZAR|No|282890|Carla Steltner|Active|2373880|PayPal|Ext12|Paid|2000.00|0.00|12/03/2025|||Full|19/03/2024|No
+idnz|7|NZD|No|287723|Emma Wilson|Active|2313789|Wise|CourseFee|Paid|91.50|0.00|4/03/2025|||Monthly|25/08/2024|No
+nunz|92|NZD|No|288248|Michelle Fahey|Active|2318263|Wise|CourseFee|Paid|22.80|0.00|26/03/2025|||Weekly|6/09/2024|No
+finz|121|NZD|No|289417|Sonya Bolek|Active|2328181|PayPal|CourseFee|Paid|91.50|0.00|1/03/2025|||Monthly|30/09/2024|No
+idcafr|74|CAD|No|289475|Romaissa Zeraoulia|Active|2328763|PayPal|CourseFee|Paid|183.17|0.00|1/03/2025|||Monthly|1/10/2024|No
+idco|109|COP|No|290710|Alejandra Canales|Active|2340669|PayPal|CourseFee|Paid|199916.00|0.00|20/03/2025|||Monthly|20/11/2024|No
+idar|106|ARS|No|290945|Jorgelina Bembhy|Active|2342952|PayPal|CourseFee|Paid|66650.00|0.00|29/03/2025|||Monthly|29/11/2024|No
+idus|15|USD|No|291338|Arelys Nigaglioni|Active|2346419|PayPal|CourseFee|Paid|37.46|0.00|1/03/2025|||Weekly|14/12/2024|No
+idus|15|USD|No|291339|Karen Ramos|Active|2346444|PayPal|CourseFee|Paid|37.46|0.00|1/03/2025|||Weekly|14/12/2024|No
+idsa|3|ZAR|No|291771|Lauren Rosaline Mentor|Active|2350800|PayPal|CourseFee|Paid|1833.17|0.00|3/03/2025|||Monthly|3/01/2025|No
+nusa|93|ZAR|No|291937|Nicola|Active|2352576|PayPal|CourseFee|Paid|916.58|0.00|7/03/2025|||Monthly|7/01/2025|No
+picl|52|CLP|No|291938|Ingrid Rossel Vera|Active|2352583|PayPal|CourseFee|Paid|41663.00|0.00|7/03/2025|||Monthly|7/01/2025|No
+idus|15|USD|No|292065|Lily Patterson|Active|2353796|PayPal|CourseFee|Paid|62.46|0.00|1/03/2025|||Weekly|11/01/2025|Yes
+pisa|10|ZAR|No|292151|Kaamilah Dollie|Active|2354580|PayPal|CourseFee|Paid|1833.17|0.00|14/03/2025|||Monthly|14/01/2025|No
+idca|17|CAD|No|292463|Nguyễn Thị Xuân Mai|Active|2357249|PayPal|CourseFee|Paid|149.84|0.00|3/03/2025|||Monthly|21/01/2025|No
+idca|17|CAD|No|292463|Nguyễn Thị Xuân Mai|Active|2357250|PayPal|CourseFee|Paid|149.84|0.00|3/03/2025|||Monthly|21/01/2025|No
+idsa|3|ZAR|No|292890|Ammaarah van Wyk|Active|2360595|PayPal|CourseFee|Paid|1833.17|0.00|29/03/2025|||Monthly|29/01/2025|No
+idco|109|COP|No|293059|Ivan Martsev Vergara Burbano|Active|2361859|PayPal|CourseFee|Paid|49979.00|0.00|7/03/2025|||Weekly|31/01/2025|No
+idco|109|COP|No|293059|Ivan Martsev Vergara Burbano|Active|2361860|PayPal|CourseFee|Paid|49979.00|0.00|14/03/2025|||Weekly|31/01/2025|No
+idco|109|COP|No|293059|Ivan Martsev Vergara Burbano|Active|2361861|PayPal|CourseFee|Paid|49979.00|0.00|21/03/2025|||Weekly|31/01/2025|No
+iduk|14|GBP|No|293247|Sophie Isobel Arcedeckne-Butler|Active|2370082|Wise|CourseFee|Paid|37.46|0.00|14/03/2025|||Weekly|5/02/2025|No
+nusa|93|ZAR|No|293296|Bernadette Remacle|Active|2363437|PayPal|CourseFee|Paid|916.58|0.00|6/03/2025|||Monthly|6/02/2025|No
+nusa|93|ZAR|No|293296|Bernadette Remacle|Active|2372089|PayPal|Webinar|Paid|533.00|0.00|5/03/2025|||Monthly|6/02/2025|No
+idnz|7|NZD|No|293406|Laressa Howard|Active|2364304|Wise|CourseFee|Paid|1099.00|0.00|26/03/2025|||Full|9/02/2025|Yes
+idmy|41|MYR|No|293454|Joey Kuan Yew Jo|Active|2364997|PayPal|CourseFee|Paid|458.17|0.00|11/03/2025|||Monthly|11/02/2025|No
+idmy|41|MYR|No|293454|Joey Kuan Yew Jo|Active|2376656|PayPal|AdvMod|Paid|549.00|0.00|23/03/2025|23/03/2025|31/03/2025|Monthly|11/02/2025|No
+nusa|93|ZAR|No|294011|Stuart Alvaro Ali|Active|2368807|PayPal|CourseFee|Paid|1499.83|0.00|25/03/2025|||Monthly|25/02/2025|No
+idca|17|CAD|No|294265|Amber Phoenix|Active|2370681|PayPal|CourseFee|Paid|183.17|0.00|1/03/2025|||Monthly|1/03/2025|No
+idfr|72|EUR|No|294313|Radia Ahmed-Ali|Cancelled|2373908|PayPal|CourseFee|Refund|-166.50|0.00|12/03/2025|||Monthly|2/03/2025|No
+pich|5|CHF|No|294547|Maria-Elena Nappi|Active|2373572|PayPal|CourseFee|Paid|91.50|0.00|11/03/2025|||Monthly|11/03/2025|No
+picl|52|CLP|No|294589|Martin Griño Huidobro|Active|2374084|PayPal|CourseFee|Paid|20831.00|0.00|12/03/2025|||Weekly|12/03/2025|No
+picl|52|CLP|No|294589|Martin Griño Huidobro|Active|2374085|PayPal|CourseFee|Paid|20831.00|0.00|19/03/2025|||Weekly|12/03/2025|No
+picl|52|CLP|No|294589|Martin Griño Huidobro|Active|2374086|PayPal|CourseFee|Paid|20831.00|0.00|25/03/2025|||Weekly|12/03/2025|No
+pinz|9|NZD|No|294607|Ann Wong|Active|2374285|Wise|CourseFee|Paid|45.79|0.00|12/03/2025|||Weekly|13/03/2025|No
+pinz|9|NZD|No|294607|Ann Wong|Active|2374286|Wise|CourseFee|Paid|45.79|0.00|19/03/2025|||Weekly|13/03/2025|No
+pinz|9|NZD|No|294607|Ann Wong|Active|2374287|Wise|CourseFee|Paid|45.79|0.00|26/03/2025|||Weekly|13/03/2025|No
+pisa|10|ZAR|No|294623|Jandri Human|Active|2374439|PayPal|CourseFee|Paid|9999.00|0.00|24/03/2025|||Full|13/03/2025|No
+piit|32|EUR|No|294772|Lisa Lombardi|Cancelled|2375892|PayPal|CourseFee|Paid|141.50|0.00|19/03/2025|||Custom|19/03/2025|No
+idsa|3|ZAR|No|294875|Madie Botha|Active|2377010|PayPal|CourseFee|Paid|13999.00|0.00|24/03/2025|||Full|24/03/2025|Yes
+idcl|108|CLP|No|294910|Javiera Espinosa Bunster|Active|2377279|PayPal|CourseFee|Paid|83325.00|0.00|25/03/2025|||Monthly|25/03/2025|No
+pisa|10|ZAR|No|295024|Surita Malherbe|Active|2378191|PayPal|CourseFee|Paid|1833.17|0.00|28/03/2025|||Monthly|28/03/2025|No
+idsa|3|ZAR|No|295032|Soraya Moses|Active|2378317|PayPal|CourseFee|Paid|458.29|0.00|29/03/2025|||Weekly|29/03/2025|No

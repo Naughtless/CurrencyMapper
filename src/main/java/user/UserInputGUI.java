@@ -51,15 +51,31 @@ public class UserInputGUI
         }
 
         // Prompt user selection.
-        ConsoleMessage.input("Specify " + Ansi.BOLD + Ansi.DARK_GREEN + instruction + Ansi.RESET + " source file!");
+        while(true)
+        {
+            ConsoleMessage.input("Specify " + Ansi.BOLD + Ansi.DARK_GREEN + instruction + Ansi.RESET + " source file!");
 
-        BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
-        String userSource              = "";
-        try { userSource = "sources\\" + files[Integer.parseInt(userInputReader.readLine())-1].getName(); }
-        catch(IOException iox) { ConsoleMessage.error(iox, "FATAL - Unable to read user input."); }
-        
-        ConsoleMessage.br();
-        
-        return userSource;
+            BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
+            String userSource              = "";
+            try
+            {
+                userSource = "sources\\" + files[Integer.parseInt(userInputReader.readLine())-1].getName();
+                return userSource;
+            }
+            catch(NumberFormatException nfe)
+            {
+                ConsoleMessage.warning("Don't be a silly goose. Input a NUMBER!");
+            }
+            catch(ArrayIndexOutOfBoundsException aiob)
+            {
+                ConsoleMessage.warning("Don't be a silly goose. Pick an available file!");
+            }
+            catch(IOException iox)
+            {
+                ConsoleMessage.error(iox, "FATAL - Unable to read user input.");
+            }
+
+            ConsoleMessage.br();
+        }
     }
 }

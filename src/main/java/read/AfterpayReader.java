@@ -44,11 +44,15 @@ public class AfterpayReader
         {
             return new AfterpayRate(fee_percentage, fee_flat, gst);
         }
-        
+
         ConsoleMessage.error(
-                new RuntimeException("FATAL - Read sucessfully but unable to get rate for AfterPay!"),
-                "FATAL - Read sucessfully but unable to get rate for AfterPay!"
+                "FATAL - Read 'AfterPay' sucessfully but unable to comprehend it!"
         );
+        ConsoleMessage.warning(
+                "That doesn't look like an 'AfterPay' file! Are you being silly? Is the file dirty/broken?"
+        );
+        System.exit(1);
+        
         return null;
     }
 }

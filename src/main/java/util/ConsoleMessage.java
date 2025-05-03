@@ -9,6 +9,11 @@ public class ConsoleMessage
         System.out.println(Ansi.DARK_RED + "ERROR: " + message + Ansi.RESET);
         throw new RuntimeException(x);
     }
+
+    public static void error(String message)
+    {
+        System.out.println(Ansi.DARK_RED + "ERROR: " + message + Ansi.RESET);
+    }
     
     public static void warning(String message) 
     {

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class PaymentData implements CSV {
     //<editor-fold desc="Properties">
-    private static String header = "site|product_id|currency|legal_entity|studentid|fullname|student_status|paymentid|payment_type|item_type|payment_status|amount|gst|payment_date|module_start_date|module_end_date|schedule|enrolment_date|Addon";
+    public static final String header = "site|product_id|currency|legal_entity|studentid|fullname|student_status|paymentid|payment_type|item_type|payment_status|amount|gst|payment_date|module_start_date|module_end_date|schedule|enrolment_date|Addon";
 
     private String site;
     private String productId;
@@ -140,14 +140,6 @@ public class PaymentData implements CSV {
     //</editor-fold>
 
     //<editor-fold desc="Getters & Setters">
-    public static String getHeader() {
-        return header;
-    }
-
-    public static void setHeader(String header) {
-        PaymentData.header = header;
-    }
-
     public String getSite() {
         return site;
     }

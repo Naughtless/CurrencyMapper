@@ -83,7 +83,7 @@ public class ExchangerateModule
             {
                 matches.add(new Match(
                         currentMaster,
-                        "EXC, Already AUD",
+                        "EXC - Already AUD",
                         currentMaster.getAmount(),
                         new String[]{}
                 ));
@@ -95,7 +95,7 @@ public class ExchangerateModule
                 ExchangeRate rate = exchangeRateMap.get(masterCurrency);
                 if (rate != null)
                 {
-                    matches.add(new Match(currentMaster, rate, "EXC"));
+                    matches.add(new Match(currentMaster, rate, "EXC - Converted"));
                     ConsoleMessage.debug(
                             "Match found (Converted) for SID: " + currentMaster.getStudentId() 
                             + " using rate " + rate.getSource() 

@@ -3,10 +3,10 @@ package main.java.common;
 import main.java.process.exchangerate.model.ExchangeRate;
 import main.java.process.paypal.model.PayPal;
 
-public class Match
+public class Match implements CSV
 {
     // Header
-    private String header;
+    public static final String header = PaymentData.header + "|RESPONSE|AUD VALUE|INFO DUMP|d1|d2|d3|d4|d5|d6|d7|d8|d9|d0";
 
     // Original Payment Data entry.
     private PaymentData paymentData;
@@ -71,6 +71,20 @@ public class Match
                 exchangeRate.getRate()
         };
     }
+    
+    @Override
+    public String buildCSVLine() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.paymentData.buildCSVLine()).append("|");
+        sb.append(this.response).append("|");
+        sb.append(this.audValue).append("|");
+        for(int i = 0; i < infoDump.length; i++)
+        {
+            sb.append(infoDump[i]).append("|");
+        }
+        
+        return sb.toString();
+    }
 
     //<editor-fold desc="Getters & Setters">
     public PaymentData getPaymentData()
@@ -81,16 +95,6 @@ public class Match
     public void setPaymentData(PaymentData paymentData)
     {
         this.paymentData = paymentData;
-    }
-
-    public String getHeader()
-    {
-        return header;
-    }
-
-    public void setHeader(String header)
-    {
-        this.header = header;
     }
 
     public String getResponse()

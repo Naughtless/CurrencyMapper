@@ -1,14 +1,11 @@
 package main.java.write;
 
-
-
 import main.java.common.CSV;
-
 import java.io.*;
 import java.util.List;
 
 public class CSVWriter<T extends CSV> {
-    private void ensureDirectoryExists(String path) {
+    private static void ensureDirectoryExists(String path) {
         File file = new File(path);
         File parent = file.getParentFile();
         if (parent != null && !parent.exists()) {
@@ -16,7 +13,7 @@ public class CSVWriter<T extends CSV> {
         }
     }
 
-    public void writeHeader(String path, String header) throws IOException {
+    public static void writeHeader(String path, String header) throws IOException {
         ensureDirectoryExists(path);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, false))) {
             writer.write(header);
