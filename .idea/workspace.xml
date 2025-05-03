@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="CurrencyMapper_v2:jar" />
+      <artifact name="CurrencyMapper_v2" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,32 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1bd7d7c-5c4a-49b7-af67-c97b47002120" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/CurrencyMapper_v2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/CurrencyMapper_v2_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/old/matches (archived).csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/old/matches - Copy.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/old/no_matches (archived).csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/old/no_matches - Copy.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/z_matches.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/z_no_matches.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/Exchange Rate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/ExchangeRate Mar-2025.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/PayPal-Mar25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/PayPal Mar-2025.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/Payment-Data-Mar25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/PaymentData Mar-2025.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/Exchange Rate Dec 2024.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/ExchangeRate Dec-2024.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/Exchange Rate Jan 2025.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/ExchangeRate Jan-2025.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/Exchange Rate Nov 2024.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/ExchangeRate Nov-2024.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/PP-Oct24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PayPal Oct-2024.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/PayPal-Dec24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PayPal Dec-2024.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/PayPal-Jan25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PayPal Jan-2025.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/PayPal-Nov24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PayPal Nov-2024.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/Payment-Data-Dec24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PaymentData Dec-2024.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/Payment-Data-Jan25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PaymentData Jan-2025.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/Payment-Data-Nov24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PaymentData Nov-2024.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/exchrate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/ExchangeRate Oct-2024.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/old/pd-oct24-fixed.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PaymentData Oct-2024.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/read/ExchangeRateReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/ExchangeRateReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/runners/ConsoleApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/ConsoleApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/ConsoleMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/ConsoleMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,14 +49,15 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/Jason/OneDrive/Archives/Repositories/Ika Projects/CurrencyMapper",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.31494254",
     "settings.editor.selected.configurable": "settings.sync",
     "vue.rearranger.settings.migration": "true"
   }
@@ -139,6 +119,7 @@
       <workItem from="1745295995131" duration="14992000" />
       <workItem from="1745377691669" duration="37733000" />
       <workItem from="1745895088097" duration="47271000" />
+      <workItem from="1746265553748" duration="387000" />
     </task>
     <servers />
   </component>
