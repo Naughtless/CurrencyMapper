@@ -1,3 +1,0 @@
-fee_percentage=0.0525
-fee_flat=0.3
-gst=0.1
