@@ -10,25 +10,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1bd7d7c-5c4a-49b7-af67-c97b47002120" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/CurrencyMapper_v2_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/matches (archived).csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/old/matches (archived).csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/matches - Copy.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/old/matches - Copy.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/no_matches (archived).csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/old/no_matches (archived).csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/no_matches - Copy.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results/old/no_matches - Copy.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/PaymentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/PaymentData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/exchangerate/ExchangerateModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/exchangerate/ExchangerateModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/process/paypal/PayPalModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/process/paypal/PayPalModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/read/AfterpayReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/AfterpayReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/read/PayPalReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/PayPalReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/read/PaymentDataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/PaymentDataReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/runners/ConsoleApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/runners/ConsoleApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/user/UserInputGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/UserInputGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/old/matches (archived).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/old/matches - Copy.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/old/no_matches (archived).csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/old/no_matches - Copy.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/z_matches.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/z_no_matches.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/Exchange Rate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/ExchangeRate Mar-2025.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/PayPal-Mar25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/PayPal Mar-2025.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/Payment-Data-Mar25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/PaymentData Mar-2025.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/Exchange Rate Dec 2024.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/ExchangeRate Dec-2024.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/Exchange Rate Jan 2025.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/ExchangeRate Jan-2025.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/Exchange Rate Nov 2024.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/ExchangeRate Nov-2024.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/PP-Oct24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PayPal Oct-2024.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/PayPal-Dec24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PayPal Dec-2024.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/PayPal-Jan25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PayPal Jan-2025.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/PayPal-Nov24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PayPal Nov-2024.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/Payment-Data-Dec24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PaymentData Dec-2024.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/Payment-Data-Jan25.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PaymentData Jan-2025.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/Payment-Data-Nov24.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PaymentData Nov-2024.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/exchrate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/ExchangeRate Oct-2024.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/old/pd-oct24-fixed.csv" beforeDir="false" afterPath="$PROJECT_DIR$/sources/old/PaymentData Oct-2024.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/read/ExchangeRateReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/read/ExchangeRateReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/runners/ConsoleApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/ConsoleApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/util/ConsoleMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/ConsoleMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/write/CSVWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/write/CSVWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/write/OldWriter.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +78,7 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "configurable.group.build",
+    "settings.editor.selected.configurable": "settings.sync",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -82,11 +89,11 @@
   </component>
   <component name="RunManager" selected="Application.ConsoleApp">
     <configuration name="ConsoleApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.runners.ConsoleApp" />
+      <option name="MAIN_CLASS_NAME" value="main.java.main.ConsoleApp" />
       <module name="CurrencyMapper" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.java.runners.*" />
+          <option name="PATTERN" value="main.java.main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -162,7 +169,7 @@
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/runners/ConsoleApp.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/main/ConsoleApp.java</url>
           <line>131</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>

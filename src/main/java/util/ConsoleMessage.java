@@ -1,6 +1,6 @@
 package main.java.util;
 
-import main.java.runners.ConsoleApp;
+import main.java.main.ConsoleApp;
 
 public class ConsoleMessage
 {
