@@ -185,31 +185,47 @@ public class PayPalModule
             boolean     foundMatch    = false;
 
             // 2X. Common filter(s).
-            /* In this case, filter for ONLY PAYPAL! */
-            if (currentMaster.getPaymentType().equals("PayPal"))
+            
+            /* Fck around to generate filter vars here. */            
+            // This is a var to check if the PayPal data (amount) is broken or not.
+            String amountStr = currentMaster.getAmount();
+            boolean isAmountDouble = true;
+            try {
+                Double.parseDouble(amountStr);
+            } catch (NumberFormatException e) {
+                isAmountDouble = false;
+            }
+             
+            /* APPLY ACTUAL FILTER HERE. */
+            if (
+                    // Filter for ONLY PAYPAL.
+                    !currentMaster.getPaymentType().equals("PayPal")
+                    || !isAmountDouble
+            ) continue;
+                
+
+            // Common data.
+            String currency      = currentMaster.getCurrency();
+            String paymentStatus = currentMaster.getPaymentStatus();
+            String studentId     = currentMaster.getStudentId();
+            String date          = currentMaster.getPaymentDate();
+
+
+            // 2A. Process: Category 1 (AUD, Paid)
+            /* For Category 1 (AUD, Paid):
+             * - Look for 'currency' = 'AUD' in PaymentData.
+             * - Look for 'payment_status' = 'Paid' in PaymentData.
+             * + Usually single entry in PayPal (group of 1 in PaypalGroup).
+             * + Type: 'Pre-approved Payment Bill User Payment'
+             * +- 'amount' in PaymentData and 'Gross' in PayPal should be same.
+             */
+            if (currency.equals("AUD") && paymentStatus.equals("Paid"))
             {
-                // Common data.
-                String currency      = currentMaster.getCurrency();
-                String paymentStatus = currentMaster.getPaymentStatus();
-                String studentId     = currentMaster.getStudentId();
-                String date          = currentMaster.getPaymentDate();
+                int searchResults = searchPaypalGroup(paypalGrouped, studentId, date);
+                if (searchResults == -1) continue;
+                foundMatch = true;
 
-
-                // 2A. Process: Category 1 (AUD, Paid)
-                /* For Category 1 (AUD, Paid):
-                 * - Look for 'currency' = 'AUD' in PaymentData.
-                 * - Look for 'payment_status' = 'Paid' in PaymentData.
-                 * + Usually single entry in PayPal (group of 1 in PaypalGroup).
-                 * + Type: 'Pre-approved Payment Bill User Payment'
-                 * +- 'amount' in PaymentData and 'Gross' in PayPal should be same.
-                 */
-                if (currency.equals("AUD") && paymentStatus.equals("Paid"))
-                {
-                    int searchResults = searchPaypalGroup(paypalGrouped, studentId, date);
-                    if (searchResults == -1) continue;
-                    foundMatch = true;
-
-                    PayPalGrouped ppg = paypalGrouped.get(searchResults);
+                PayPalGrouped ppg = paypalGrouped.get(searchResults);
                     /*
                      Safety Checks for expected behaviour
                      - 'ppg' should only have length of 1.
@@ -217,229 +233,247 @@ public class PayPalModule
                      - 'Gross' in 'ppg[0]' should be equals to 'amount' in 'currentMaster'
                      */
 
-                    // CPG length should be 1.
-                    if (ppg.getMembers().size() != 1)
-                    {
-                        ConsoleMessage.error(
-                                new RuntimeException(),
-                                "Unexpected behaviour in 'PaypalModule', Category 1: PPgr has more than one member!" + "\nExpected: CPG member(s) count is 1" + "\nFound: CPG member(s) count is " + ppg.getMembers()
-                                        .size()
-                        );
-                    }
-                    // ppg single member should have type "Pre-approved..."
-                    if (!ppg.getMembers()
-                            .getFirst()
-                            .getType()
-                            .equals("Pre-approved Payment Bill User Payment"))
-                    {
-                        ConsoleMessage.error(
-                                new RuntimeException(),
-                                "Unexpected behaviour in 'PaypalModule', Category 1: PPgr type is wrong!" + "\nExpected: \"Pre-approved Payment Bill User Payment\"" + "\nFound: " + ppg.getMembers()
-                                        .getFirst()
-                                        .getType()
-                        );
-                    }
-                    // gross and amount should be equals.
-                    if (
-                            !(
-                                    Double.parseDouble(
-                                            ppg.getMembers()
-                                                    .getFirst()
-                                                    .getGross()
-                                    ) 
-                                    ==
-                                    Double.parseDouble(
-                                            currentMaster.getAmount())
-                            )
-                    )
-                    {
-                        // This means that even though SID and dates matched, somehow the amount does not!
-                        ConsoleMessage.warning(
-                                "[PayPal] (CAT-1) Anomalous gross/amount mismatch for Student ID: " + currentMaster.getStudentId() + " -> Assuming 'Non-Match'."
-                                + " Despite SID & dates matching, gross/amount did not match:"
-                                + " (PD amount: " + currentMaster.getAmount()
-                                + ") (PPG amount: " + ppg.getMembers().getFirst().getGross() + ")"
-                        );
-                        continue;
-                    }
-
-                    Match currentMatch = new Match(
-                            currentMaster,
-                            ppg.getMembers().getFirst(),
-                            "PayPal - Already AUD",
-                            false
+                // CPG length should be 1.
+                if (ppg.getMembers().size() != 1)
+                {
+                    ConsoleMessage.error(
+                            new RuntimeException(),
+                            "Unexpected behaviour in 'PaypalModule', Category 1: PPgr has more than one member!" + "\nExpected: CPG member(s) count is 1" + "\nFound: CPG member(s) count is " + ppg.getMembers()
+                                    .size()
                     );
-                    matches.add(currentMatch);
-
-                    paypalGrouped.remove(searchResults);
+                }
+                // ppg single member should have type "Pre-approved..."
+                if (!ppg.getMembers()
+                        .getFirst()
+                        .getType()
+                        .equals("Pre-approved Payment Bill User Payment"))
+                {
+                    ConsoleMessage.error(
+                            new RuntimeException(),
+                            "Unexpected behaviour in 'PaypalModule', Category 1: PPgr type is wrong!" + "\nExpected: \"Pre-approved Payment Bill User Payment\"" + "\nFound: " + ppg.getMembers()
+                                    .getFirst()
+                                    .getType()
+                    );
+                }
+                // gross and amount should be equals.
+                if (
+                        !(
+                                Double.parseDouble(
+                                        ppg.getMembers()
+                                                .getFirst()
+                                                .getGross()
+                                )
+                                ==
+                                Double.parseDouble(
+                                        currentMaster.getAmount())
+                        )
+                )
+                {
+                    // This means that even though SID and dates matched, somehow the amount does not!
+                    ConsoleMessage.warning(
+                            "[PayPal] (CAT-1) Anomalous gross/amount mismatch for Student ID: " + currentMaster.getStudentId() + " -> Assuming 'Non-Match'."
+                            + " Despite SID & dates matching, gross/amount did not match:"
+                            + " (PD amount: " + currentMaster.getAmount()
+                            + ") (PPG amount: " + ppg.getMembers().getFirst().getGross() + ")"
+                    );
+                    continue;
                 }
 
-                // 2B. Process: Category 2 (Not AUD, Paid)
-                /* For Category 2 (Not AUD, Paid):
-                 * - 'currency' in PaymentData != 'AUD'
-                 * - 'payment_status' in PaymentData = 'Paid'
-                 * + Usually a group of 3 in PayPal. 1x Original Trf, and 2x currency conv.
-                 * + MATCH using 'amount' in PD with 'Gross' in PP
-                 *   ++ PP 'Type' = 'Pre-approved Payment Bill User Payment' IN ORIGINAL CURRENCY.
-                 * + RESULTS, look for the last 'Type' = 'General Currency Conversion' && 'Currency' = 'AUD'
-                 *   ++ SAME 'currency' in PP = PD.
-                 */
-                else if (!currency.equals("AUD") && paymentStatus.equals("Paid"))
+                Match currentMatch = new Match(
+                        currentMaster,
+                        ppg.getMembers().getFirst(),
+                        "PayPal - Already AUD",
+                        false
+                );
+                matches.add(currentMatch);
+
+                paypalGrouped.remove(searchResults);
+            }
+
+            // 2B. Process: Category 2 (Not AUD, Paid)
+            /* For Category 2 (Not AUD, Paid):
+             * - 'currency' in PaymentData != 'AUD'
+             * - 'payment_status' in PaymentData = 'Paid'
+             * + Usually a group of 3 in PayPal. 1x Original Trf, and 2x currency conv.
+             * + MATCH using 'amount' in PD with 'Gross' in PP
+             *   ++ PP 'Type' = 'Pre-approved Payment Bill User Payment' IN ORIGINAL CURRENCY.
+             * + RESULTS, look for the last 'Type' = 'General Currency Conversion' && 'Currency' = 'AUD'
+             *   ++ SAME 'currency' in PP = PD.
+             */
+            else if (!currency.equals("AUD") && paymentStatus.equals("Paid"))
+            {
+                int searchResults = searchPaypalGroup(paypalGrouped, studentId, date);
+                if (searchResults == -1) continue;
+                foundMatch = true;
+
+                PayPalGrouped ppg = paypalGrouped.get(searchResults);
+
+                // Logic to find which of the group of 3 in ppg's members contains AUD.
+                ArrayList<PayPal> ppgMembers = ppg.getMembers();
+                PayPal            target     = null;
+
+                // First check the original currency.
+                boolean originalCurrencyMatchFound = false;
+                for (PayPal cpp : ppgMembers)
                 {
-                    int searchResults = searchPaypalGroup(paypalGrouped, studentId, date);
-                    if (searchResults == -1) continue;
-                    foundMatch = true;
+                    if (cpp.getType()
+                                .equals("Pre-approved Payment Bill User Payment") && (Double.parseDouble(
+                            cpp.getGross()) == Double.parseDouble(currentMaster.getAmount())))
+                    {
+                        originalCurrencyMatchFound = true;
+                    }
+                }
 
-                    PayPalGrouped ppg = paypalGrouped.get(searchResults);
-
-                    // Logic to find which of the group of 3 in ppg's members contains AUD.
-                    ArrayList<PayPal> ppgMembers = ppg.getMembers();
-                    PayPal            target     = null;
-
-                    // First check the original currency.
-                    boolean originalCurrencyMatchFound = false;
+                // If original currency matches, find the converted value.
+                if (originalCurrencyMatchFound)
+                {
                     for (PayPal cpp : ppgMembers)
                     {
                         if (cpp.getType()
-                                    .equals("Pre-approved Payment Bill User Payment") && (Double.parseDouble(
-                                cpp.getGross()) == Double.parseDouble(currentMaster.getAmount())))
+                                    .equals("General Currency Conversion") && cpp.getCurrency()
+                                    .equals("AUD"))
                         {
-                            originalCurrencyMatchFound = true;
+                            target = cpp;
                         }
                     }
-
-                    // If original currency matches, find the converted value.
-                    if (originalCurrencyMatchFound)
-                    {
-                        for (PayPal cpp : ppgMembers)
-                        {
-                            if (cpp.getType()
-                                        .equals("General Currency Conversion") && cpp.getCurrency()
-                                        .equals("AUD"))
-                            {
-                                target = cpp;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // This means FOUND, but somehow the currencies or something do not match!
-                        ConsoleMessage.warning(
-                                "[PayPal] (CAT-2) Anomalous currency mismatch for Student ID: " + currentMaster.getStudentId() + " -> Assuming 'Non-Match'."
-                                + " Despite SID & dates matching, currencies did not match!"
-                        );
-                        continue;
-                    }
-
-                    Match currentMatch = new Match(
-                            currentMaster,
-                            target,
-                            "PayPal - Converted",
-                            false
-                    );
-                    matches.add(currentMatch);
-
-                    paypalGrouped.remove(searchResults);
                 }
-
-                // 2C. Process: Category 3 (AUD, Refund)
-                /* -----------------------------
-                 * For Category 3 (AUD, Refund):
-                 * - Look for 'currency' = 'AUD' in PaymentData.
-                 * - Look for 'payment_status' = 'Refund' in PaymentData.
-                 * + Usually in a group of 1 in Paypal.
-                 * + Original payment and refund should have the same invoiceNumber.
-                 * + Type: 'Payment Refund'
-                 * +- 'amount' in PD and 'Gross' in PP should be same (NEGATIVE NUMBER).
-                 */
-                else if (currency.equals("AUD") && paymentStatus.equals("Refund"))
+                else
                 {
-                    int searchResults = searchPaypal(payPalRefunds, studentId, date);
-                    if (searchResults == -1) continue;
-                    foundMatch = true;
-
-                    PayPal pp = payPalRefunds.get(searchResults);
-
-                    // pp should have type "Payment Refund"
-                    if (!pp.getType().equals("Payment Refund"))
-                    {
-                        ConsoleMessage.error(
-                                new RuntimeException(),
-                                "Unexpected behaviour in 'PaypalModule', Category 3: PP type is wrong!" + "\nExpected: \"Payment Refund\"" + "\nFound: " + pp.getType()
-                        );
-                    }
-                    // gross and amount should be equals.
-                    if (!(Double.parseDouble(pp.getGross()) == Double.parseDouble(
-                            currentMaster.getAmount())))
-                    {
-                        ConsoleMessage.error(
-                                new RuntimeException(),
-                                "Unexpected behaviour in 'PaypalModule', Category 3: PP gross mismatch with PD amount!" + "\nCPG gross: " + pp.getGross() + "\nPD amount: " + currentMaster.getAmount()
-                        );
-                    }
-
-                    Match currentMatch = new Match(
-                            currentMaster,
-                            pp,
-                            "PayPal - Refund",
-                            true
+                    // This means FOUND, but somehow the currencies or something do not match!
+                    ConsoleMessage.warning(
+                            "[PayPal] (CAT-2) Anomalous currency mismatch for Student ID: " + currentMaster.getStudentId() + " -> Assuming 'Non-Match'."
+                            + " Despite SID & dates matching, currencies did not match!"
                     );
-                    matches.add(currentMatch);
-
-                    payPalRefunds.remove(searchResults);
+                    continue;
                 }
 
-                // 2D. Process: Category 4 (Not AUD, Refund)
-                /* For Category 4 (Not AUD, Refund):
-                 * - 'currency' in PaymentData != 'AUD'
-                 * - 'payment_status' in PaymentData = 'Refund'
-                 * + Usually in a group of 1 in Paypal.
-                 * + MATCH using 'amount' in PD with 'Gross' in PP
-                 *   ++ PP Type: 'Payment Refund'
-                 *   ++ SAME CURRENCY (because taxes and fees are also refunded??)
-                 * -> Therefor 'audValue' in Match.java should be ZERO.
-                 */
-                else if (!currency.equals("AUD") && paymentStatus.equals("Refund"))
-                {
-                    int searchResults = searchPaypal(payPalRefunds, studentId, date);
-                    if (searchResults == -1) continue;
-                    foundMatch = true;
+                Match currentMatch = new Match(
+                        currentMaster,
+                        target,
+                        "PayPal - Converted",
+                        false
+                );
+                matches.add(currentMatch);
 
-                    PayPal pp = payPalRefunds.get(searchResults);
-
-                    // pp should have type "Payment Refund"
-                    if (!pp.getType().trim().equals("Payment Refund"))
-                    {
-                        ConsoleMessage.error(
-                                new RuntimeException(),
-                                "Unexpected behaviour in 'PaypalModule', Category 4: PP type is wrong!" + "\nExpected: Payment Refund" + "\nFound: " + pp.getType()
-                        );
-                    }
-                    // gross and amount should be equals.
-                    if (!(Double.parseDouble(pp.getGross()) == Double.parseDouble(
-                            currentMaster.getAmount())))
-                    {
-                        ConsoleMessage.error(
-                                new RuntimeException(),
-                                "Unexpected behaviour in 'PaypalModule', Category 3: PP gross mismatch with PD amount!" + "\nCPG gross: " + pp.getGross() + "\nPD amount: " + currentMaster.getAmount()
-                        );
-                    }
-
-                    Match currentMatch = new Match(
-                            currentMaster,
-                            pp,
-                            "PayPal - Refund",
-                            true
-                    );
-                    matches.add(currentMatch);
-
-                    payPalRefunds.remove(searchResults);
-                }
-
-                // 2-Final. If a match was found, then remove it from the master array.
-                if (foundMatch) masterIterator.remove();
-
+                paypalGrouped.remove(searchResults);
             }
+
+            // 2C. Process: Category 3 (AUD, Refund)
+            /* -----------------------------
+             * For Category 3 (AUD, Refund):
+             * - Look for 'currency' = 'AUD' in PaymentData.
+             * - Look for 'payment_status' = 'Refund' in PaymentData.
+             * + Usually in a group of 1 in Paypal.
+             * + Original payment and refund should have the same invoiceNumber.
+             * + Type: 'Payment Refund'
+             * +- 'amount' in PD and 'Gross' in PP should be same (NEGATIVE NUMBER).
+             */
+            else if (currency.equals("AUD") && paymentStatus.equals("Refund"))
+            {
+                int searchResults = searchPaypal(payPalRefunds, studentId, date);
+                if (searchResults == -1) continue;
+                foundMatch = true;
+
+                PayPal pp = payPalRefunds.get(searchResults);
+
+                // pp should have type "Payment Refund"
+                if (!pp.getType().equals("Payment Refund"))
+                {
+                    ConsoleMessage.error(
+                            new RuntimeException(),
+                            "Unexpected behaviour in 'PaypalModule', Category 3: PP type is wrong!" + "\nExpected: \"Payment Refund\"" + "\nFound: " + pp.getType()
+                    );
+                }
+                // gross and amount should be equals.
+                if (!(Double.parseDouble(pp.getGross()) == Double.parseDouble(
+                        currentMaster.getAmount())))
+                {
+                    /*
+                     * Change:
+                     * Do not throw RuntimeException. But instead put into no-matches.
+                     */
+//                        ConsoleMessage.error(
+//                                new RuntimeException(),
+//                                "Unexpected behaviour in 'PaypalModule', Category 3: PP gross mismatch with PD amount!" + "\nCPG gross: " + pp.getGross() + "\nPD amount: " + currentMaster.getAmount()
+//                        );
+                    ConsoleMessage.warning(
+                            "[PayPal] (CAT 3) Unexpected behaviour! PP gross mismatch with PD amount!"
+                            + " PP gross: " + pp.getGross() + ". PD amount: " + currentMaster.getAmount() + "."
+                            + " -> Assuming 'Non-Match'."
+                    );
+                    continue;
+                }
+
+                Match currentMatch = new Match(
+                        currentMaster,
+                        pp,
+                        "PayPal - Refund",
+                        true
+                );
+                matches.add(currentMatch);
+
+                payPalRefunds.remove(searchResults);
+            }
+
+            // 2D. Process: Category 4 (Not AUD, Refund)
+            /* For Category 4 (Not AUD, Refund):
+             * - 'currency' in PaymentData != 'AUD'
+             * - 'payment_status' in PaymentData = 'Refund'
+             * + Usually in a group of 1 in Paypal.
+             * + MATCH using 'amount' in PD with 'Gross' in PP
+             *   ++ PP Type: 'Payment Refund'
+             *   ++ SAME CURRENCY (because taxes and fees are also refunded??)
+             * -> Therefor 'audValue' in Match.java should be ZERO.
+             */
+            else if (!currency.equals("AUD") && paymentStatus.equals("Refund"))
+            {
+                int searchResults = searchPaypal(payPalRefunds, studentId, date);
+                if (searchResults == -1) continue;
+                foundMatch = true;
+
+                PayPal pp = payPalRefunds.get(searchResults);
+
+                // pp should have type "Payment Refund"
+                if (!pp.getType().trim().equals("Payment Refund"))
+                {
+                    ConsoleMessage.error(
+                            new RuntimeException(),
+                            "Unexpected behaviour in 'PaypalModule', Category 4: PP type is wrong!" + "\nExpected: Payment Refund" + "\nFound: " + pp.getType()
+                    );
+                }
+                // gross and amount should be equals.
+                if (!(Double.parseDouble(pp.getGross()) == Double.parseDouble(
+                        currentMaster.getAmount())))
+                {
+                    /*
+                     * Change:
+                     * Do not throw RuntimeException. But instead put into no-matches.
+                     */
+//                        ConsoleMessage.error(
+//                                new RuntimeException(),
+//                                "Unexpected behaviour in 'PaypalModule', Category 4: PP gross mismatch with PD amount!" + "\nCPG gross: " + pp.getGross() + "\nPD amount: " + currentMaster.getAmount()
+//                        );
+                    ConsoleMessage.warning(
+                            "[PayPal] (CAT 4) Unexpected behaviour! PP gross mismatch with PD amount!"
+                            + " PP gross: " + pp.getGross() + ". PD amount: " + currentMaster.getAmount() + "."
+                            + " -> Assuming 'Non-Match'."
+                    );
+                    continue;
+                }
+
+                Match currentMatch = new Match(
+                        currentMaster,
+                        pp,
+                        "PayPal - Refund",
+                        true
+                );
+                matches.add(currentMatch);
+
+                payPalRefunds.remove(searchResults);
+            }
+
+            // 2-Final. If a match was found, then remove it from the master array.
+            if (foundMatch) masterIterator.remove();
         }
 
         return matches;

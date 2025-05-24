@@ -71,11 +71,26 @@ public class ExchangerateModule
         Iterator<PaymentData> masterIterator = rawMaster.iterator();
         while (masterIterator.hasNext())
         {
+            // Pull out common vars.
             PaymentData currentMaster  = masterIterator.next();
             String      masterType     = currentMaster.getPaymentType();
             String      masterCurrency = currentMaster.getCurrency().toUpperCase();
 
-            if (!allowedTypes.contains(masterType)) continue;
+            /* Fck around to generate filter vars here. */
+            // This is a var to check if the PayPal data (amount) is broken or not.
+            String amountStr = currentMaster.getAmount();
+            boolean isAmountDouble = true;
+            try {
+                Double.parseDouble(amountStr);
+            } catch (NumberFormatException e) {
+                isAmountDouble = false;
+            }
+
+            /* APPLY ACTUAL FILTER HERE. */
+            if (
+                    !allowedTypes.contains(masterType) 
+                    || !isAmountDouble
+            ) continue;
 
             ConsoleMessage.debug("Processing exchange rate for SID: " + currentMaster.getStudentId());
 
